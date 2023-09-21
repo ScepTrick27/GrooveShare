@@ -4,7 +4,7 @@ import com.fontys.s3.grooveshare.business.UpdateUserUseCase;
 import com.fontys.s3.grooveshare.domain.UpdateUserRequest;
 import com.fontys.s3.grooveshare.persistance.UserRepository;
 import com.fontys.s3.grooveshare.persistance.entity.UserEntity;
-import com.fontys.s3.grooveshare.business.exception.UserException;
+import com.fontys.s3.grooveshare.business.exception.InvalidUserIdException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ public class UpdateUserUseCaseImpl implements UpdateUserUseCase {
         Optional<UserEntity> userOptional = userRepository.findById(request.getUserId());
 
         if (userOptional.isEmpty()) {
-            throw new UserException("USER_ID_INVALID");
+            throw new InvalidUserIdException("USER_ID_INVALID");
         }
 
             UserEntity user = userOptional.get();

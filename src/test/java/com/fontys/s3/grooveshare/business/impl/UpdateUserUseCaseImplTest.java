@@ -1,6 +1,6 @@
 package com.fontys.s3.grooveshare.business.impl;
 
-import com.fontys.s3.grooveshare.business.exception.UserException;
+import com.fontys.s3.grooveshare.business.exception.InvalidUserIdException;
 import com.fontys.s3.grooveshare.domain.UpdateUserRequest;
 import com.fontys.s3.grooveshare.persistance.UserRepository;
 import com.fontys.s3.grooveshare.persistance.entity.UserEntity;
@@ -67,9 +67,9 @@ class UpdateUserUseCaseImplTest {
 
         when(userRepository.findById(userId)).thenReturn(Optional.empty());
 
-        UserException userException = assertThrows(UserException.class, () -> updateUserUseCase.updateUser(request));
+        InvalidUserIdException invalidUserIdException = assertThrows(InvalidUserIdException.class, () -> updateUserUseCase.updateUser(request));
 
-        assertTrue(userException.getMessage().contains(expectedMessage));
+        assertTrue(invalidUserIdException.getMessage().contains(expectedMessage));
 
         verify(userRepository).findById(userId);
     }

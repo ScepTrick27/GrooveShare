@@ -14,16 +14,14 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 @ExtendWith(MockitoExtension.class)
 class CreateUserUseCaseImplTest {
-
     @Mock
     private UserRepository userRepository;
     @InjectMocks
     private CreateUserUseCaseImpl createUserUseCase;
 
-    /*@Test
+    @Test
     void CreateUserShouldCreateANewUser(){
 
         CreateUserRequest request = CreateUserRequest.builder()
@@ -49,6 +47,5 @@ class CreateUserUseCaseImplTest {
         assertEquals(expected, actual);
 
         verify(userRepository).save(userToSave);
-    }*/
-
+    }
 }

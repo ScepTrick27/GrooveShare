@@ -53,7 +53,7 @@ private final UpdateUserUseCase updateUserUseCase;
     public ResponseEntity<Void> updateUser(@PathVariable("id") long id,
                                               @RequestBody @Valid UpdateUserRequest request) {
         request.setUserId(id);
-        updateUserUseCase.updateStudent(request);
+        updateUserUseCase.updateUser(request);
         return ResponseEntity.noContent().build();
     }
 }

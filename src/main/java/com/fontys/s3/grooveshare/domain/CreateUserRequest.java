@@ -11,12 +11,8 @@ import lombok.Data;
 @Data
 @Builder
 public class CreateUserRequest {
-    @Min(3)
-    @Max(25)
     @NotBlank
     private String username;
-    @Min(5)
-    @Max(25)
     @NotBlank
     private String password;
     private String description;

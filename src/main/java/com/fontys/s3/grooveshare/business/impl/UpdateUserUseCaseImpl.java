@@ -15,8 +15,11 @@ public class UpdateUserUseCaseImpl implements UpdateUserUseCase {
 
     private final UserRepository userRepository;
     @Override
-    public void updateStudent(UpdateUserRequest request) {
+    public void updateUser(UpdateUserRequest request) {
         Optional<UserEntity> userOptional = userRepository.findById(request.getUserId());
+
+        UserEntity user = userOptional.get();
+        updateFields(request, user);
 
     }
 

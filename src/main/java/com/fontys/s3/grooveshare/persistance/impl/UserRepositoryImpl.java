@@ -16,7 +16,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     private List<UserEntity> users;
 
-    public UserRepositoryImpl(){
+    public UserRepositoryImpl() {
         this.users = new ArrayList<>();
     }
 

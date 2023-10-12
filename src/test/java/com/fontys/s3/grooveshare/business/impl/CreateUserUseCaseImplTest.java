@@ -1,7 +1,7 @@
 package com.fontys.s3.grooveshare.business.impl;
 
-import com.fontys.s3.grooveshare.domain.CreateUserRequest;
-import com.fontys.s3.grooveshare.domain.CreateUserResponse;
+import com.fontys.s3.grooveshare.business.DTOs.CreateUserRequest;
+import com.fontys.s3.grooveshare.business.DTOs.CreateUserResponse;
 import com.fontys.s3.grooveshare.persistance.UserRepository;
 import com.fontys.s3.grooveshare.persistance.entity.UserEntity;
 import com.fontys.s3.grooveshare.persistance.entity.UserGenderEntity;
@@ -11,7 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)

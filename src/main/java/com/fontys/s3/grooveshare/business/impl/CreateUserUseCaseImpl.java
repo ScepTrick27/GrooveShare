@@ -1,8 +1,8 @@
 package com.fontys.s3.grooveshare.business.impl;
 
 import com.fontys.s3.grooveshare.business.CreateUserUseCase;
-import com.fontys.s3.grooveshare.domain.CreateUserRequest;
-import com.fontys.s3.grooveshare.domain.CreateUserResponse;
+import com.fontys.s3.grooveshare.business.DTOs.CreateUserRequest;
+import com.fontys.s3.grooveshare.business.DTOs.CreateUserResponse;
 import com.fontys.s3.grooveshare.persistance.UserRepository;
 import com.fontys.s3.grooveshare.persistance.entity.UserEntity;
 import lombok.AllArgsConstructor;

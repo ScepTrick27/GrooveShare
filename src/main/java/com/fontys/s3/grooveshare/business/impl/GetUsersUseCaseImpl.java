@@ -1,8 +1,8 @@
 package com.fontys.s3.grooveshare.business.impl;
 
+import com.fontys.s3.grooveshare.business.DTOs.GetAllUsersRequest;
+import com.fontys.s3.grooveshare.business.DTOs.GetAllUsersResponse;
 import com.fontys.s3.grooveshare.business.GetUsersUseCase;
-import com.fontys.s3.grooveshare.domain.GetAllUsersRequest;
-import com.fontys.s3.grooveshare.domain.GetAllUsersResponse;
 import com.fontys.s3.grooveshare.domain.User;
 import com.fontys.s3.grooveshare.persistance.UserRepository;
 import com.fontys.s3.grooveshare.persistance.entity.UserEntity;

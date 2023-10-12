@@ -1,7 +1,8 @@
 package com.fontys.s3.grooveshare.controller;
 
 import com.fontys.s3.grooveshare.business.*;
-import com.fontys.s3.grooveshare.domain.*;
+import com.fontys.s3.grooveshare.business.DTOs.*;
+import com.fontys.s3.grooveshare.domain.User;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = { "http://localhost:5173" })
 @AllArgsConstructor
 public class UserController {
 

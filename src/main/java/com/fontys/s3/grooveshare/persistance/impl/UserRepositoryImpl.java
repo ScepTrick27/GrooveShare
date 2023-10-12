@@ -1,7 +1,9 @@
 package com.fontys.s3.grooveshare.persistance.impl;
 
+import com.fontys.s3.grooveshare.domain.User;
 import com.fontys.s3.grooveshare.persistance.UserRepository;
 import com.fontys.s3.grooveshare.persistance.entity.UserEntity;
+import com.fontys.s3.grooveshare.persistance.entity.UserGenderEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

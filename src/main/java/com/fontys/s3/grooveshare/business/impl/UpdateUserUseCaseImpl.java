@@ -1,7 +1,7 @@
 package com.fontys.s3.grooveshare.business.impl;
 
+import com.fontys.s3.grooveshare.business.DTOs.UpdateUserRequest;
 import com.fontys.s3.grooveshare.business.UpdateUserUseCase;
-import com.fontys.s3.grooveshare.domain.UpdateUserRequest;
 import com.fontys.s3.grooveshare.persistance.UserRepository;
 import com.fontys.s3.grooveshare.persistance.entity.UserEntity;
 import com.fontys.s3.grooveshare.business.exception.InvalidUserIdException;

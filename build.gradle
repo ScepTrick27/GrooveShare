@@ -11,6 +11,7 @@ sonar {
     properties {
         property "sonar.projectKey", "GrooveShare"
         property "sonar.projectName", "GrooveShare"
+        property "sonar.token", "sqp_52554695bdda98a8d248b2347fcc61c1f322ec0b"
         property "sonar.qualitygate.wait", true
         property "sonar.java.coveragePlugin", "jacoco"
         property "sonar.coverage.jacoco.xmlReportPath", "${buildDir}/reports/jacoco.xml"

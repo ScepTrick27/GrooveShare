@@ -80,4 +80,5 @@ jacocoTestReport{
 
 tasks.named('sonarqube').configure {
     dependsOn jacocoTestReport
+
 }

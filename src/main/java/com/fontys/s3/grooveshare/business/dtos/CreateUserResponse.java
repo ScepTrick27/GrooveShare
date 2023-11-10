@@ -1,4 +1,4 @@
-package com.fontys.s3.grooveshare.domain;
+package com.fontys.s3.grooveshare.business.dtos;
 
 import lombok.Builder;
 import lombok.Data;

@@ -1,6 +1,6 @@
 package com.fontys.s3.grooveshare.business.impl;
 
-import com.fontys.s3.grooveshare.business.DTOs.UpdateUserRequest;
+import com.fontys.s3.grooveshare.business.dtos.UpdateUserRequest;
 import com.fontys.s3.grooveshare.business.exception.InvalidUserIdException;
 import com.fontys.s3.grooveshare.persistance.UserRepository;
 import com.fontys.s3.grooveshare.persistance.entity.UserEntity;
@@ -31,7 +31,7 @@ class UpdateUserUseCaseImplTest {
                 .username("user1")
                 .password("password1")
                 .description("description1")
-                .userGender(UserGenderEntity.Female)
+                .userGender(UserGenderEntity.FEMALE)
                 .build();
 
         when(userRepository.findById(1L)).thenReturn(Optional.of(userEntity));
@@ -39,9 +39,7 @@ class UpdateUserUseCaseImplTest {
         UpdateUserRequest updateRequest = UpdateUserRequest.builder()
                 .userId(1L)
                 .username("updatedUser")
-                .password("updatedPassword")
                 .description("updatedDescription")
-                .userGender(UserGenderEntity.Male)
                 .build();
 
         updateUserUseCase.updateUser(updateRequest);
@@ -49,7 +47,6 @@ class UpdateUserUseCaseImplTest {
         verify(userRepository, times(1)).findById(1L);
 
         assertEquals("updatedUser", userEntity.getUsername());
-        assertEquals("updatedPassword", userEntity.getPassword());
         assertEquals("updatedDescription", userEntity.getDescription());
     }
 
@@ -60,8 +57,6 @@ class UpdateUserUseCaseImplTest {
         UpdateUserRequest request = UpdateUserRequest.builder()
                 .userId(userId)
                 .username("newUsername")
-                .password("newPassword")
-                .userGender(UserGenderEntity.Female)
                 .description("newDescription")
                 .build();
 

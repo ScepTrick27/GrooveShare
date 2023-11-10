@@ -15,6 +15,7 @@ return User.builder()
         .password(user.getPassword())
         .description(user.getDescription())
         .userGender(user.getUserGender())
+        .userRole(user.getUserRole())
         .build();
 }
 }

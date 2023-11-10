@@ -1,10 +1,11 @@
 package com.fontys.s3.grooveshare.business.impl;
 
-import com.fontys.s3.grooveshare.business.DTOs.UpdateUserRequest;
+import com.fontys.s3.grooveshare.business.dtos.UpdateUserRequest;
 import com.fontys.s3.grooveshare.business.UpdateUserUseCase;
 import com.fontys.s3.grooveshare.persistance.UserRepository;
 import com.fontys.s3.grooveshare.persistance.entity.UserEntity;
 import com.fontys.s3.grooveshare.business.exception.InvalidUserIdException;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ public class UpdateUserUseCaseImpl implements UpdateUserUseCase {
 
     private final UserRepository userRepository;
     @Override
+    @Transactional
     public void updateUser(UpdateUserRequest request) {
         Optional<UserEntity> userOptional = userRepository.findById(request.getUserId());
 
@@ -30,9 +32,7 @@ public class UpdateUserUseCaseImpl implements UpdateUserUseCase {
 
 private void updateFields(UpdateUserRequest request, UserEntity user){
     user.setUsername(request.getUsername());
-    user.setPassword((request.getPassword()));
     user.setDescription(request.getDescription());
-    user.setUserGender(request.getUserGender());
 
 }
 }

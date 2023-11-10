@@ -1,5 +1,6 @@
-package com.fontys.s3.grooveshare.domain;
+package com.fontys.s3.grooveshare.business.dtos;
 
+import com.fontys.s3.grooveshare.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

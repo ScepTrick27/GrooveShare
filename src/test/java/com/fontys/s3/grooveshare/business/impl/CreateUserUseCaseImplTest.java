@@ -1,51 +1,77 @@
 package com.fontys.s3.grooveshare.business.impl;
 
-import com.fontys.s3.grooveshare.business.DTOs.CreateUserRequest;
-import com.fontys.s3.grooveshare.business.DTOs.CreateUserResponse;
+import com.fontys.s3.grooveshare.business.dtos.CreateUserRequest;
+import com.fontys.s3.grooveshare.business.dtos.CreateUserResponse;
+import com.fontys.s3.grooveshare.persistance.RoleRepository;
 import com.fontys.s3.grooveshare.persistance.UserRepository;
+import com.fontys.s3.grooveshare.persistance.entity.RoleEnum;
 import com.fontys.s3.grooveshare.persistance.entity.UserEntity;
 import com.fontys.s3.grooveshare.persistance.entity.UserGenderEntity;
+import com.fontys.s3.grooveshare.persistance.entity.UserRoleEntity;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class CreateUserUseCaseImplTest {
     @Mock
     private UserRepository userRepository;
+
+    @Mock
+    private RoleRepository roleRepository;
+
+    @Mock
+    private PasswordEncoder passwordEncoder;
+
     @InjectMocks
     private CreateUserUseCaseImpl createUserUseCase;
 
     @Test
-    void CreateUserShouldCreateANewUser(){
-
+    void createUserShouldCreateANewUser() {
+        // Mock data
         CreateUserRequest request = CreateUserRequest.builder()
                 .username("test1")
                 .password("test1")
-                .userGender(UserGenderEntity.Female)
+                .userGender(UserGenderEntity.MALE)
                 .description("test1")
+                .userRole(UserRoleEntity.builder().id(1L).role(RoleEnum.USER).build())
                 .build();
 
-        UserEntity userToSave = UserEntity.builder()
-                .username(request.getUsername())
-                .password(request.getPassword())
-                .userGender(request.getUserGender())
-                .description(request.getDescription())
+        UserRoleEntity mockedRole = UserRoleEntity.builder()
+                .id(1L)
+                .role(RoleEnum.USER)
                 .build();
 
-        when(userRepository.save(userToSave)).thenReturn(UserEntity.builder().userId(1L).build());
+        UserEntity savedUser = UserEntity.builder()
+                .userId(1L)
+                .build();
 
+        // Mocking behavior
+        when(roleRepository.findByRole(RoleEnum.USER)).thenReturn(mockedRole);
+        when(passwordEncoder.encode("test1")).thenReturn("encodedPassword");
+        when(userRepository.save(any(UserEntity.class))).thenReturn(savedUser);
 
+        // Test the method
         CreateUserResponse actual = createUserUseCase.createUser(request);
         CreateUserResponse expected = CreateUserResponse.builder().userId(1L).build();
 
+        // Verify the interactions and assertions
         assertEquals(expected, actual);
 
-        verify(userRepository).save(userToSave);
+        verify(roleRepository).findByRole(RoleEnum.USER);
+        verify(passwordEncoder).encode("test1");
+        verify(userRepository).save(any(UserEntity.class));
     }
 }
+
+
+
+
+

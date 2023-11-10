@@ -1,17 +1,19 @@
-package com.fontys.s3.grooveshare.domain;
+package com.fontys.s3.grooveshare.business.dtos;
 
 import com.fontys.s3.grooveshare.persistance.entity.UserGenderEntity;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
+import com.fontys.s3.grooveshare.persistance.entity.UserRoleEntity;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-public class UpdateUserRequest {
-    private Long userId;
+@NoArgsConstructor
+@AllArgsConstructor
+public class CreateUserRequest {
     @NotBlank
     private String username;
     @NotBlank
@@ -19,4 +21,5 @@ public class UpdateUserRequest {
     private String description;
     @NotNull
     private UserGenderEntity userGender;
+    private UserRoleEntity userRole;
 }

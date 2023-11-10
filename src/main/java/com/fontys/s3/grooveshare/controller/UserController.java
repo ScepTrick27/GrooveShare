@@ -1,28 +1,30 @@
 package com.fontys.s3.grooveshare.controller;
 
 import com.fontys.s3.grooveshare.business.*;
-import com.fontys.s3.grooveshare.business.DTOs.*;
+import com.fontys.s3.grooveshare.business.dtos.*;
 import com.fontys.s3.grooveshare.domain.User;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @RestController
+@EnableMethodSecurity
 @RequestMapping("/users")
-@CrossOrigin(origins = { "http://localhost:5173" })
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 @AllArgsConstructor
 public class UserController {
 
-private final GetUserUseCase getUserUseCase;
-private final DeleteUserUseCase deleteUserUseCase;
-private final GetUsersUseCase getUsersUseCase;
-private final CreateUserUseCase createUserUseCase;
-private final UpdateUserUseCase updateUserUseCase;
-
+    private final GetUserUseCase getUserUseCase;
+    private final DeleteUserUseCase deleteUserUseCase;
+    private final GetUsersUseCase getUsersUseCase;
+    private final CreateUserUseCase createUserUseCase;
+    private final UpdateUserUseCase updateUserUseCase;
+    private final LogInUserUseCase loginUserUseCase;
     @GetMapping("{id}")
     public ResponseEntity<User> getUser(@PathVariable(value = "id") final long id) {
         final Optional<User> userOptional = getUserUseCase.getUser(id);
@@ -53,9 +55,15 @@ private final UpdateUserUseCase updateUserUseCase;
 
     @PutMapping("{id}")
     public ResponseEntity<Void> updateUser(@PathVariable("id") long id,
-                                              @RequestBody @Valid UpdateUserRequest request) {
+                                           @RequestBody @Valid UpdateUserRequest request) {
         request.setUserId(id);
         updateUserUseCase.updateUser(request);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping(path = "/tokens")
+    public ResponseEntity<LogInUserResponse> login(@RequestBody @Valid LogInUserRequest loginRequest) {
+        LogInUserResponse loginResponse = loginUserUseCase.loginUser(loginRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(loginResponse);
     }
 }

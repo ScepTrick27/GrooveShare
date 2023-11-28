@@ -1,5 +1,6 @@
 package com.fontys.s3.grooveshare.business.impl;
 
+import com.fontys.s3.grooveshare.persistance.PostRepository;
 import com.fontys.s3.grooveshare.persistance.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,6 +15,9 @@ import static org.mockito.Mockito.verify;
 class DeleteUserUseCaseImplTest {
     @Mock
     private UserRepository userRepository;
+
+    @Mock
+    private PostRepository postRepository;
 
     @InjectMocks
     private DeleteUserUseCaseImpl deleteUserUseCase;

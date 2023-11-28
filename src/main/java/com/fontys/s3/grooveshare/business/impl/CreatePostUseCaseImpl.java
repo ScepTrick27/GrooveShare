@@ -24,19 +24,28 @@ public class CreatePostUseCaseImpl implements CreatePostUseCase {
     public CreatePostResponse createPost(CreatePostRequest request) {
         PostEntity savedPost = saveNewPost(request);
 
-        return CreatePostResponse.builder()
-                .postId(savedPost.getPostId())
-                .content(savedPost.getContent())
-                .build();
+        if (savedPost != null) {
+            return CreatePostResponse.builder()
+                    .postId(savedPost.getPostId())
+                    .content(savedPost.getContent())
+                    .build();
+        } else {
+            return CreatePostResponse.builder()
+                    .build();
+        }
     }
 
     private PostEntity saveNewPost(CreatePostRequest request) {
         Optional<UserEntity> user = userRepository.findById(request.getUserId());
 
-        PostEntity newPost = PostEntity.builder()
-                .content(request.getContent())
-                .user(user.orElse(null))
-                .build();
-        return postRepository.save(newPost);
+        if (user.isPresent()) {
+            PostEntity newPost = PostEntity.builder()
+                    .content(request.getContent())
+                    .user(user.get())
+                    .build();
+            return postRepository.save(newPost);
+        } else {
+            return null;
+        }
     }
 }

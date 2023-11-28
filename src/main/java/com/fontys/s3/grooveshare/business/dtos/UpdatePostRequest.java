@@ -1,5 +1,6 @@
-package com.fontys.s3.grooveshare.domain;
+package com.fontys.s3.grooveshare.business.dtos;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,8 +10,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Post {
+public class UpdatePostRequest {
     private Long postId;
+    @NotBlank
     private String content;
-    private User user;
 }

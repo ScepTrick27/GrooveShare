@@ -1,0 +1,42 @@
+package com.fontys.s3.grooveshare.business.impl;
+
+import com.fontys.s3.grooveshare.business.CreatePostUseCase;
+import com.fontys.s3.grooveshare.business.dtos.CreatePostRequest;
+import com.fontys.s3.grooveshare.business.dtos.CreatePostResponse;
+import com.fontys.s3.grooveshare.persistance.PostRepository;
+import com.fontys.s3.grooveshare.persistance.UserRepository;
+import com.fontys.s3.grooveshare.persistance.entity.PostEntity;
+import com.fontys.s3.grooveshare.persistance.entity.UserEntity;
+import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+@Service
+@AllArgsConstructor
+public class CreatePostUseCaseImpl implements CreatePostUseCase {
+    private final UserRepository userRepository;
+    private final PostRepository postRepository;
+
+    @Transactional
+    @Override
+    public CreatePostResponse createPost(CreatePostRequest request) {
+        PostEntity savedPost = saveNewPost(request);
+
+        return CreatePostResponse.builder()
+                .postId(savedPost.getPostId())
+                .content(savedPost.getContent())
+                .build();
+    }
+
+    private PostEntity saveNewPost(CreatePostRequest request) {
+        Optional<UserEntity> user = userRepository.findById(request.getUserId());
+
+        PostEntity newPost = PostEntity.builder()
+                .content(request.getContent())
+                .user(user.orElse(null))
+                .build();
+        return postRepository.save(newPost);
+    }
+}

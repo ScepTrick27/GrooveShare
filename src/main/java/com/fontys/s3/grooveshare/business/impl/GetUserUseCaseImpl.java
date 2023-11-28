@@ -13,7 +13,6 @@ import java.util.Optional;
 @AllArgsConstructor
 public class GetUserUseCaseImpl implements GetUserUseCase {
     private final UserRepository userRepository;
-    private AccessToken requestAccessToken;
 
     @Override
     public Optional<User> getUser(long userId) {

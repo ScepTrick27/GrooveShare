@@ -15,6 +15,9 @@ public class DeletePostUseCaseImpl implements DeletePostUseCase {
     @Override
     @Transactional
     public void deletePost(Long postId) {
+        if (postId == null || postId == -1) {
+            throw new IllegalArgumentException("postId cannot be null");
+        }
         this.postRepository.deleteById(postId);
     }
 }

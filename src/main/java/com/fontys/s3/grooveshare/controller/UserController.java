@@ -3,6 +3,7 @@ package com.fontys.s3.grooveshare.controller;
 import com.fontys.s3.grooveshare.business.*;
 import com.fontys.s3.grooveshare.business.dtos.*;
 import com.fontys.s3.grooveshare.domain.User;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,7 @@ public class UserController {
     private final CreateUserUseCase createUserUseCase;
     private final UpdateUserUseCase updateUserUseCase;
     private final LogInUserUseCase loginUserUseCase;
+
     @GetMapping("{id}")
     public ResponseEntity<User> getUser(@PathVariable(value = "id") final long id) {
         final Optional<User> userOptional = getUserUseCase.getUser(id);

@@ -40,7 +40,7 @@ class GetAllUsersResponseTest {
     public void testEqualsAndHashCode() {
         List<User> users1 = Arrays.asList(new User(), new User());
         List<User> users2 = Arrays.asList(new User(), new User());
-        List<User> users3 = Arrays.asList(new User());
+        List<User> users3 = List.of(new User());
 
         GetAllUsersResponse response1 = GetAllUsersResponse.builder().users(users1).build();
         GetAllUsersResponse response2 = GetAllUsersResponse.builder().users(users2).build();

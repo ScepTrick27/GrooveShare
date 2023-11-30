@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class AccessTokenEncoderDecoderImplTest {
 
-    private AccessTokenEncoderDecoderImpl encoderDecoder = new AccessTokenEncoderDecoderImpl("E91E158E4C6656F68B1B5D1C316766DE98D2AD6EF3BFB44F78E9CFCDF5");
+    private final AccessTokenEncoderDecoderImpl encoderDecoder = new AccessTokenEncoderDecoderImpl("E91E158E4C6656F68B1B5D1C316766DE98D2AD6EF3BFB44F78E9CFCDF5");
 
     @Test
     void encodeAndDecodeAccessToken() {

@@ -45,11 +45,13 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation 'org.projectlombok:lombok:1.18.26'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
     testImplementation "org.mockito:mockito-core:3.+"
+    testImplementation 'org.projectlombok:lombok:1.18.26'
     testImplementation 'junit:junit:4.13.1'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
@@ -63,11 +65,15 @@ dependencies {
 jacoco {
     toolVersion = "0.8.9"
     reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
+
 }
 
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
+    jacoco {
+        excludes += ['**/jooq/**/*.class', 'com/fontys/s3/grooveshare/configuration/**/*.class']
+    }
 }
 
 jacocoTestReport{
@@ -77,6 +83,7 @@ jacocoTestReport{
         html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
     }
     dependsOn test
+
 }
 
 tasks.named('sonarqube').configure {

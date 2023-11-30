@@ -40,7 +40,7 @@ class GetAllPostsResponseTest {
     public void testEqualsAndHashCode() {
         List<Post> posts1 = Arrays.asList(new Post(), new Post());
         List<Post> posts2 = Arrays.asList(new Post(), new Post());
-        List<Post> posts3 = Arrays.asList(new Post());
+        List<Post> posts3 = List.of(new Post());
 
         GetAllPostsResponse response1 = GetAllPostsResponse.builder().posts(posts1).build();
         GetAllPostsResponse response2 = GetAllPostsResponse.builder().posts(posts2).build();

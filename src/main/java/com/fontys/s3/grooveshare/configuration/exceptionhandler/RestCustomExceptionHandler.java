@@ -23,7 +23,7 @@ import java.util.List;
 @Slf4j
 public class RestCustomExceptionHandler extends ResponseEntityExceptionHandler {
 
-    private static final URI VALIDATION_ERROR_TYPE = URI.create("/validation-error");
+    public static final URI VALIDATION_ERROR_TYPE = URI.create("/validation-error");
 
     @ExceptionHandler(value = {AccessDeniedException.class})
     public ResponseEntity<Object> handleConstraintViolationException(final AccessDeniedException error) {

@@ -83,6 +83,14 @@ jacocoTestReport{
         html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
     }
     dependsOn test
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    "**/jooq/**/*.class",
+                    "com/fontys/s3/grooveshare/configuration/**/*.class"
+            ])
+        }))
+    }
 
 }
 

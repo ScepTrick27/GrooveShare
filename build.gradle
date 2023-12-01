@@ -7,7 +7,7 @@ plugins {
     id 'org.flywaydb.flyway' version '7.8.1'
 }
 
-sonar {
+sonarqube {
     properties {
         property "sonar.projectKey", "GrooveShare"
         property "sonar.projectName", "GrooveShare"
@@ -16,7 +16,7 @@ sonar {
         property "sonar.java.coveragePlugin", "jacoco"
         property "sonar.coverage.jacoco.xmlReportPath", "${buildDir}/reports/jacoco.xml"
     }
-    }
+}
 
 
 flyway {
@@ -71,9 +71,6 @@ jacoco {
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
-    jacoco {
-        excludes += ['**/jooq/**/*.class', 'com/fontys/s3/grooveshare/configuration/**/*.class']
-    }
 }
 
 jacocoTestReport{
@@ -83,16 +80,7 @@ jacocoTestReport{
         html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
     }
     dependsOn test
-    afterEvaluate {
-        classDirectories.setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: [
-                    "**/jooq/**/*.class",
-                    "com/fontys/s3/grooveshare/configuration/**/*.class"
-            ])
-        }))
     }
-
-}
 
 tasks.named('sonarqube').configure {
     dependsOn jacocoTestReport

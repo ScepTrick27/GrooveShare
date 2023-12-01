@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(PostController.class)
-@Import({ TestConfig.class })
+@Import(TestConfig.class)
 class PostControllerTest {
     @Autowired
     private MockMvc mockMvc;

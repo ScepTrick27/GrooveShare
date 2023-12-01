@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/posts")
 @AllArgsConstructor
-@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:*", allowCredentials = "true")
 public class PostController {
     private final PostRepository postRepository;
     private final CreatePostUseCase createPostUseCase;

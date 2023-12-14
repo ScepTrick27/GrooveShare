@@ -1,5 +1,6 @@
 package com.fontys.s3.grooveshare.business.dtos;
 
+import com.fontys.s3.grooveshare.business.dtos.userDtos.CreateUserRequest;
 import com.fontys.s3.grooveshare.persistance.entity.UserGenderEntity;
 import com.fontys.s3.grooveshare.persistance.entity.UserRoleEntity;
 import jakarta.validation.Validation;

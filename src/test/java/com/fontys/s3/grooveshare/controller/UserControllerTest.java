@@ -1,8 +1,12 @@
 package com.fontys.s3.grooveshare.controller;
 
-import com.fontys.s3.grooveshare.business.*;
-import com.fontys.s3.grooveshare.business.dtos.*;
+import com.fontys.s3.grooveshare.business.dtos.userDtos.*;
+import com.fontys.s3.grooveshare.business.userInterface.GetUserUseCase;
+import com.fontys.s3.grooveshare.business.userInterface.GetUsersUseCase;
+import com.fontys.s3.grooveshare.business.userInterface.LogInUserUseCase;
+import com.fontys.s3.grooveshare.business.userInterface.UpdateUserUseCase;
 import com.fontys.s3.grooveshare.domain.User;
+import com.fontys.s3.grooveshare.persistance.entity.UserEntity;
 import com.fontys.s3.grooveshare.persistance.entity.UserGenderEntity;
 import com.fontys.s3.grooveshare.persistance.entity.UserRoleEntity;
 import org.junit.jupiter.api.Test;
@@ -10,6 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -72,14 +77,24 @@ class UserControllerTest {
 
     @Test
     void testGetAllUsers() {
-        GetAllUsersRequest request = GetAllUsersRequest.builder().build();
-        GetAllUsersResponse expectedResponse = new GetAllUsersResponse(/* mock your response data here */);
+        // Arrange
+        int page = 0;
+        int size = 10;
 
-        when(getUsersUseCase.getUsers(request)).thenReturn(expectedResponse);
+        GetAllUsersRequest expectedRequest = GetAllUsersRequest.builder()
+                .page(page)
+                .size(size)
+                .build();
 
-        ResponseEntity<GetAllUsersResponse> responseEntity = userController.getAllUsers();
+        GetAllUsersResponse expectedResponse = new GetAllUsersResponse();
 
-        assertEquals(200, responseEntity.getStatusCodeValue());
+        when(getUsersUseCase.getUsers(expectedRequest)).thenReturn(expectedResponse);
+
+        // Act
+        ResponseEntity<GetAllUsersResponse> responseEntity = userController.getAllUsers(page, size);
+
+        // Assert
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(expectedResponse, responseEntity.getBody());
     }
 

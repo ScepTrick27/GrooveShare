@@ -1,5 +1,6 @@
 package com.fontys.s3.grooveshare.business.dtos;
 
+import com.fontys.s3.grooveshare.business.dtos.postDtos.GetAllPostsResponse;
 import com.fontys.s3.grooveshare.domain.Post;
 import org.junit.jupiter.api.Test;
 

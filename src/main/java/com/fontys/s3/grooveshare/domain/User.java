@@ -1,5 +1,6 @@
 package com.fontys.s3.grooveshare.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fontys.s3.grooveshare.persistance.entity.UserGenderEntity;
 import com.fontys.s3.grooveshare.persistance.entity.UserRoleEntity;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ import lombok.NoArgsConstructor;
 public class User {
     private Long userId;
     private String username;
+    @JsonIgnore
     private String password;
     private String description;
     private UserGenderEntity userGender;

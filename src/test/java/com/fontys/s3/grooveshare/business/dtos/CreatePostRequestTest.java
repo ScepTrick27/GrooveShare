@@ -1,5 +1,6 @@
 package com.fontys.s3.grooveshare.business.dtos;
 
+import com.fontys.s3.grooveshare.business.dtos.postDtos.CreatePostRequest;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;

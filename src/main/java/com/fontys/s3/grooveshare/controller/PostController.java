@@ -1,10 +1,14 @@
 package com.fontys.s3.grooveshare.controller;
 
-import com.fontys.s3.grooveshare.business.*;
-import com.fontys.s3.grooveshare.business.dtos.*;
+import com.fontys.s3.grooveshare.business.FindPostsByFollowersUseCase;
+import com.fontys.s3.grooveshare.business.dtos.FindPostsByFollowersRequest;
+import com.fontys.s3.grooveshare.business.dtos.FindPostsByFollowersResponse;
+import com.fontys.s3.grooveshare.business.dtos.postDtos.*;
+import com.fontys.s3.grooveshare.business.impl.FindPostsByFollowersImpl;
+import com.fontys.s3.grooveshare.business.postInterface.*;
 import com.fontys.s3.grooveshare.domain.Post;
-import com.fontys.s3.grooveshare.domain.User;
 import com.fontys.s3.grooveshare.persistance.PostRepository;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,6 +28,8 @@ public class PostController {
     private final DeletePostUseCase deletePostUseCase;
     private final GetAllPostsUseCase getAllPostsUseCase;
     private final GetPostUseCase getPostUseCase;
+    private final UserPostCountUseCase userPostCountUseCase;
+    private final FindPostsByFollowersUseCase findPostsByFollowers;
 
     @PostMapping()
     public ResponseEntity<CreatePostResponse> createPost(@RequestBody @Valid CreatePostRequest request){
@@ -59,5 +65,17 @@ public class PostController {
     public ResponseEntity<Void> deletePost(@PathVariable Long postId){
         deletePostUseCase.deletePost(postId);
         return ResponseEntity.noContent().build();
+    }
+@RolesAllowed({"ADMIN"})
+    @GetMapping("stats")
+    public ResponseEntity<GetUserPostCountResponse> getUserPostCounts() {
+        GetUserPostCountResponse response = userPostCountUseCase.getUserPostCount();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/findPostsByFollowers/{userId}")
+    public ResponseEntity<FindPostsByFollowersResponse> findPostsByFollowers(@PathVariable Long userId) {
+        FindPostsByFollowersResponse response = findPostsByFollowers.findPostsByLoggedInUserAndFollowers(userId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

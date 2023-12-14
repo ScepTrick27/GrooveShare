@@ -1,11 +1,11 @@
 package com.fontys.s3.grooveshare.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fontys.s3.grooveshare.business.*;
-import com.fontys.s3.grooveshare.business.dtos.CreatePostRequest;
-import com.fontys.s3.grooveshare.business.dtos.CreatePostResponse;
-import com.fontys.s3.grooveshare.business.dtos.GetAllPostsRequest;
-import com.fontys.s3.grooveshare.business.dtos.GetAllPostsResponse;
+import com.fontys.s3.grooveshare.business.FindPostsByFollowersUseCase;
+import com.fontys.s3.grooveshare.business.dtos.postDtos.GetAllPostsRequest;
+import com.fontys.s3.grooveshare.business.dtos.postDtos.GetAllPostsResponse;
+import com.fontys.s3.grooveshare.business.dtos.postDtos.GetUserPostCountResponse;
+import com.fontys.s3.grooveshare.business.postInterface.*;
 import com.fontys.s3.grooveshare.config.TestConfig;
 import com.fontys.s3.grooveshare.domain.Post;
 import com.fontys.s3.grooveshare.persistance.PostRepository;
@@ -14,17 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
-import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -57,6 +54,12 @@ class PostControllerTest {
 
     @MockBean
     private GetPostUseCase getPostUseCase;
+
+    @MockBean
+    private UserPostCountUseCase userPostCountUseCase;
+
+    @MockBean
+    private FindPostsByFollowersUseCase findPostsByFollowersUseCase;
 
 //    @Test
 //    @WithMockUser(username = "testuser", roles = "USER")

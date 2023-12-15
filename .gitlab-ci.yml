@@ -1,22 +1,47 @@
-variables:
-  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
-
 stages:
   - build
   - test
   - sonarqube
+  - deploy
+
+variables:
+  SONARQUBE_IMAGE: sonarqube:latest
+  DATABASE_IMAGE: mcr.microsoft.com/mssql/server:latest
+  BACKEND_IMAGE: grooveshare-backend:latest
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+before_script:
+  - docker info
 
 sonarqube:
   stage: sonarqube
   script:
-    - ./gradlew sonarqube
+    - docker pull $SONARQUBE_IMAGE
+    - docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 $SONARQUBE_IMAGE
 
 build:
   stage: build
   script:
-    - ./gradlew assemble
+    - ./gradlew clean assemble
+    - docker build -t $BACKEND_IMAGE .
 
 test:
   stage: test
   script:
     - ./gradlew test
+
+deploy_backend:
+  stage: deploy
+  script:
+    - docker stop grooveshare-backend || true
+    - docker rm grooveshare-backend || true
+    - docker pull $BACKEND_IMAGE
+    - docker run -d -p 8090:8080 --name grooveshare-backend $BACKEND_IMAGE
+
+deploy_database:
+  stage: deploy
+  script:
+    - docker stop groovesharedb || true
+    - docker rm groovesharedb || true
+    - docker pull $DATABASE_IMAGE
+    - docker run -d -e ACCEPT_EULA=Y -e SA_PASSWORD=booMPentakill27 -p 3390:1433 --name groovesharedb $DATABASE_IMAGE

@@ -9,7 +9,7 @@ stages:
 variables:
   SONARQUBE_IMAGE: sonarqube:latest
   DATABASE_IMAGE: mcr.microsoft.com/mssql/server:latest
-  BACKEND_IMAGE: grooveshare-backend:latest
+  BACKEND_IMAGE: grooveshare-be:latest
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
 
 before_script:

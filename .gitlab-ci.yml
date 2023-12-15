@@ -26,7 +26,6 @@ build:
   script:
     - ./gradlew clean assemble
     - docker build -t $BACKEND_IMAGE .
-    - docker push $BACKEND_IMAGE
 
 test:
   stage: test
@@ -38,7 +37,6 @@ deploy_backend:
   script:
     - docker stop grooveshare-backend || $true
     - docker rm grooveshare-backend || $true
-    - docker pull $BACKEND_IMAGE
     - docker run -d -p 8090:8080 --net=docker_demo_network_staging --env spring_profiles_active=staging --name grooveshare-backend $BACKEND_IMAGE
 
 deploy_database:

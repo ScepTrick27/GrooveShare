@@ -18,8 +18,8 @@ before_script:
 sonarqube:
   stage: sonarqube
   script:
-    - docker stop sonarqube || true
-    - docker rm sonarqube || true
+    - docker stop sonarqube || $true
+    - docker rm sonarqube || $true
     - docker pull $SONARQUBE_IMAGE
     - docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 $SONARQUBE_IMAGE
 
@@ -37,15 +37,15 @@ test:
 deploy_backend:
   stage: deploy
   script:
-    - docker stop grooveshare-backend || true
-    - docker rm grooveshare-backend || true
+    - docker stop grooveshare-backend || $true
+    - docker rm grooveshare-backend || $true
     - docker pull $BACKEND_IMAGE
       - docker run -d -p 8090:8080 --net=docker_demo_network_staging --env spring_profiles_active=staging --name grooveshare-backend $BACKEND_IMAGE
 
 deploy_database:
   stage: deploy
   script:
-    - docker stop groovesharedb || true
-    - docker rm groovesharedb || true
+    - docker stop groovesharedb || $true
+    - docker rm groovesharedb || $true
     - docker pull $DATABASE_IMAGE
     - docker run -d -e ACCEPT_EULA=Y -e SA_PASSWORD=booMPentakill27 -p 1433:1433 --name groovesharedb $DATABASE_IMAGE

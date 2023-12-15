@@ -16,4 +16,5 @@ public class Follow {
     private Long id;
     private User follower;
     private User followee;
+    //user
 }

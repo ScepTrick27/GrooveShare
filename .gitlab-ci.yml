@@ -26,6 +26,7 @@ build:
   script:
     - ./gradlew clean assemble
     - docker build -t $BACKEND_IMAGE .
+    - - docker push $BACKEND_IMAGE
 
 test:
   stage: test

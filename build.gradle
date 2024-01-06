@@ -11,7 +11,7 @@ sonarqube {
     properties {
         property "sonar.projectKey", "GrooveShare"
         property "sonar.projectName", "GrooveShare"
-        property "sonar.token", "sqp_6432721aa0d4d74de0d87e37fd24852c503fe9dc"
+        property "sonar.token", "sqp_30286357230c2d585b1099064ebb62c4f39d34e7"
         property "sonar.qualitygate.wait", true
         property "sonar.java.coveragePlugin", "jacoco"
         property "sonar.coverage.exclusions", [

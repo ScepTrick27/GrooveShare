@@ -24,7 +24,7 @@ sonarqube:
 sonarqube_analysis:
   stage: sonarqube
   script:
-    - ./gradlew sonarqube
+    - ./gradlew jacocoTestReport sonarqube
   only:
     - main
 

@@ -17,7 +17,7 @@ sonarqube {
         property "sonar.coverage.exclusions", [
                 "src/main/java/com/fontys/s3/grooveshare/configuration/**/*",
                 "src/main/java/com/fontys/s3/grooveshare/GrooveShareApplication.java",
-                "rc/main/java/com/fontys/s3/grooveshare/domain/**"
+                "src/main/java/com/fontys/s3/grooveshare/domain/**"
         ]
     }
 }
@@ -91,6 +91,7 @@ afterEvaluate {
         fileTree(dir: it, exclude: [
                 "com/fontys/s3/grooveshare/configuration/**/*",
                 "com/fontys/s3/grooveshare/GrooveShareApplication.java",
+                "com/fontys/s3/grooveshare/domain/**",
         ])
     }))
 }

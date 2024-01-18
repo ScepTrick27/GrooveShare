@@ -56,7 +56,7 @@ public class CreatePostUseCaseImpl implements CreatePostUseCase {
                     .content(request.getContent())
                     .user(user.get())
                     .trackId(request.getTrackId())
-                    .genre(genre.get())
+                    .genre(genre.orElse(null))
                     .build();
             return postRepository.save(newPost);
         } else {

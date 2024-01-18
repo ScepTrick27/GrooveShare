@@ -3,6 +3,7 @@ package com.fontys.s3.grooveshare.business.impl.postImpl;
 import com.fontys.s3.grooveshare.business.impl.postImpl.GetPostUseCaseImpl;
 import com.fontys.s3.grooveshare.domain.Post;
 import com.fontys.s3.grooveshare.persistance.PostRepository;
+import com.fontys.s3.grooveshare.persistance.entity.GenreEntity;
 import com.fontys.s3.grooveshare.persistance.entity.PostEntity;
 import com.fontys.s3.grooveshare.persistance.entity.UserEntity;
 import org.junit.jupiter.api.Test;
@@ -26,9 +27,13 @@ class GetPostUseCaseImplTest {
 
     @Test
     void getPost_WithValidPostId_ShouldReturnPost() {
+        // Create a mock GenreEntity
+        GenreEntity mockGenre = GenreEntity.builder().id(1L).genre("Rock").build();
+
         UserEntity user1 = UserEntity.builder().userId(1L).username("user1").build();
 
-        PostEntity expectedPost = PostEntity.builder().postId(1L).content("Post 1 content").user(user1).build();
+        // Create a PostEntity with the mock GenreEntity
+        PostEntity expectedPost = PostEntity.builder().postId(1L).content("Post 1 content").user(user1).genre(mockGenre).build();
 
         Long postId = 1L;
         when(postRepository.findById(postId)).thenReturn(Optional.of(expectedPost));

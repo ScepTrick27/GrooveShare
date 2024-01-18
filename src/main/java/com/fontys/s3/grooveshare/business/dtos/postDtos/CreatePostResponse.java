@@ -12,4 +12,6 @@ import lombok.NoArgsConstructor;
 public class CreatePostResponse {
     private Long postId;
     private String content;
+    private String trackId;
+    private Long genreId;
 }

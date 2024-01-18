@@ -11,4 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class GetAllPostsRequest {
     private Long postId;
+    private int page;
+    private int size;
 }

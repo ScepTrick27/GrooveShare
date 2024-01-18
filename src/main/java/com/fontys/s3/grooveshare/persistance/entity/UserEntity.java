@@ -7,9 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
-import java.util.List;
-import java.util.Set;
-
 @Entity
 @Table(name = "s3_user")
 @Data
@@ -34,4 +31,9 @@ public class UserEntity {
     @ManyToOne
     @JoinColumn(name = "user_role_id")
     private UserRoleEntity userRole;
+    @Column(name = "photo")
+    private byte[] photo;
+    @Column(name = "isVerified")
+    private boolean isVerified;
+
 }

@@ -1,7 +1,5 @@
 package com.fontys.s3.grooveshare.persistance.entity;
 
-import com.fontys.s3.grooveshare.domain.Post;
-import com.fontys.s3.grooveshare.domain.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

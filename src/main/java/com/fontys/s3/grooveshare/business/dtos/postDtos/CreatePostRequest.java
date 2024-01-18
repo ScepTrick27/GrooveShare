@@ -16,4 +16,8 @@ public class CreatePostRequest {
     private String content;
     @NotNull
     private Long userId;
+
+    private String trackId;
+    @NotNull
+    private Long genreId;
 }

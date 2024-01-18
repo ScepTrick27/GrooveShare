@@ -38,7 +38,7 @@ class GetUsersUseCaseImplTest {
 
         when(userRepository.getAllUsers(any(PageRequest.class))).thenReturn(page);
 
-        GetAllUsersRequest request = GetAllUsersRequest.builder().page(0).size(10).build();
+        GetAllUsersRequest request = GetAllUsersRequest.builder().page(1).size(10).build();
 
         GetAllUsersResponse response = getUsersUseCase.getUsers(request);
 

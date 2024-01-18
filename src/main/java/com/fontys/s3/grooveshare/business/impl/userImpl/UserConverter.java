@@ -9,6 +9,9 @@ public class UserConverter {
     }
 
 public static User convert(UserEntity user){
+    if (user == null) {
+        return null;
+    }
 return User.builder()
         .userId(user.getUserId())
         .username(user.getUsername())
@@ -16,6 +19,8 @@ return User.builder()
         .description(user.getDescription())
         .userGender(user.getUserGender())
         .userRole(user.getUserRole())
+        .photo(user.getPhoto())
+        .isVerified(user.isVerified())
         .build();
 }
 }

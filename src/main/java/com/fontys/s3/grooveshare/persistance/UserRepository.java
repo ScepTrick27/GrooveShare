@@ -1,6 +1,5 @@
 package com.fontys.s3.grooveshare.persistance;
 
-import com.fontys.s3.grooveshare.domain.User;
 import com.fontys.s3.grooveshare.persistance.entity.UserEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

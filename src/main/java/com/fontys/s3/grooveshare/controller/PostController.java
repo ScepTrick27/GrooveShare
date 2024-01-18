@@ -1,10 +1,11 @@
 package com.fontys.s3.grooveshare.controller;
 
 import com.fontys.s3.grooveshare.business.FindPostsByFollowersUseCase;
-import com.fontys.s3.grooveshare.business.dtos.FindPostsByFollowersRequest;
-import com.fontys.s3.grooveshare.business.dtos.FindPostsByFollowersResponse;
+import com.fontys.s3.grooveshare.business.RecommendationByGenreUseCase;
+import com.fontys.s3.grooveshare.business.dtos.*;
 import com.fontys.s3.grooveshare.business.dtos.postDtos.*;
-import com.fontys.s3.grooveshare.business.impl.FindPostsByFollowersImpl;
+import com.fontys.s3.grooveshare.business.dtos.userDtos.GetAllUsersRequest;
+import com.fontys.s3.grooveshare.business.dtos.userDtos.GetAllUsersResponse;
 import com.fontys.s3.grooveshare.business.postInterface.*;
 import com.fontys.s3.grooveshare.domain.Post;
 import com.fontys.s3.grooveshare.persistance.PostRepository;
@@ -30,6 +31,8 @@ public class PostController {
     private final GetPostUseCase getPostUseCase;
     private final UserPostCountUseCase userPostCountUseCase;
     private final FindPostsByFollowersUseCase findPostsByFollowers;
+    private final RecommendationByGenreUseCase recommendationByGenreUseCase;
+    private final GetPostsByGenreIdUseCase getPostsByGenreIdUseCase;
 
     @PostMapping()
     public ResponseEntity<CreatePostResponse> createPost(@RequestBody @Valid CreatePostRequest request){
@@ -38,9 +41,21 @@ public class PostController {
     }
 
     @GetMapping
-    public ResponseEntity<GetAllPostsResponse> getAllPosts() {
-        GetAllPostsRequest request = GetAllPostsRequest.builder().build();
+    public ResponseEntity<GetAllPostsResponse> getAllPosts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+        GetAllPostsRequest request = GetAllPostsRequest.builder()
+                .page(page)
+                .size(size)
+                .build();
         GetAllPostsResponse response = getAllPostsUseCase.getPosts(request);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/byGenre/{genreId}")
+    public ResponseEntity<GetPostsByGenreIdResponse> getPostsByGenreId(@PathVariable("genreId")Long genreId) {
+        GetPostsByGenreIdRequest request = GetPostsByGenreIdRequest.builder()
+                .genreId(genreId)
+                .build();
+        GetPostsByGenreIdResponse response = getPostsByGenreIdUseCase.getPostsByGenreId(request);
         return ResponseEntity.ok(response);
     }
 
@@ -77,5 +92,11 @@ public class PostController {
     public ResponseEntity<FindPostsByFollowersResponse> findPostsByFollowers(@PathVariable Long userId) {
         FindPostsByFollowersResponse response = findPostsByFollowers.findPostsByLoggedInUserAndFollowers(userId);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/recommended/{userId}")
+    public ResponseEntity<RecommendationByGenreResponse> getRecommendedPosts(@PathVariable Long userId) {
+        RecommendationByGenreResponse response = recommendationByGenreUseCase.getRecommendedPosts(userId);
+        return ResponseEntity.ok(response);
     }
 }

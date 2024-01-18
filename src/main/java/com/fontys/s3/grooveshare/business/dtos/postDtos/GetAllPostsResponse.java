@@ -14,4 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 public class GetAllPostsResponse {
     private List<Post> posts;
+    private int totalPages;
+    private long totalPosts;
 }

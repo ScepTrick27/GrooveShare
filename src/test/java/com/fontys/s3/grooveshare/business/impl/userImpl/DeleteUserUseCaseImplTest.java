@@ -1,5 +1,6 @@
 package com.fontys.s3.grooveshare.business.impl.userImpl;
 
+import com.fontys.s3.grooveshare.business.exception.InvalidUserIdException;
 import com.fontys.s3.grooveshare.business.impl.userImpl.DeleteUserUseCaseImpl;
 import com.fontys.s3.grooveshare.persistance.FollowRepository;
 import com.fontys.s3.grooveshare.persistance.PostRepository;
@@ -13,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
+import static org.junit.Assert.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -44,5 +46,21 @@ class DeleteUserUseCaseImplTest {
         verify(followRepository, times(1)).deleteByFollowee(userEntity);
         verify(followRepository, times(1)).deleteByFollower(userEntity);
         verify(postRepository, times(1)).deleteByUser(userEntity);
+    }
+
+    @Test
+    void deleteUserShouldThrowInvalidUserIdExceptionForNonexistentUser() {
+        Long userIdToDelete = 1L;
+
+        when(userRepository.findById(userIdToDelete)).thenReturn(Optional.empty());
+
+        // Assert that InvalidUserIdException is thrown
+        assertThrows(InvalidUserIdException.class, () -> deleteUserUseCase.DeleteUser(userIdToDelete));
+
+        // Verify that repository methods are not called
+        verify(userRepository, never()).deleteById(userIdToDelete);
+        verify(followRepository, never()).deleteByFollowee(any());
+        verify(followRepository, never()).deleteByFollower(any());
+        verify(postRepository, never()).deleteByUser(any());
     }
     }

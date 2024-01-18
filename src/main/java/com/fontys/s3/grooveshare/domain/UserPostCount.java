@@ -1,6 +1,5 @@
 package com.fontys.s3.grooveshare.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;

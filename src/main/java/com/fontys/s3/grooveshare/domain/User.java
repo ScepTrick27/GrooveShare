@@ -20,4 +20,6 @@ public class User {
     private String description;
     private UserGenderEntity userGender;
     private UserRoleEntity userRole;
+    private byte[] photo;
+    private boolean isVerified;
 }

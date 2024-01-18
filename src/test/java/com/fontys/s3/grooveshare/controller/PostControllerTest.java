@@ -2,6 +2,7 @@ package com.fontys.s3.grooveshare.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fontys.s3.grooveshare.business.FindPostsByFollowersUseCase;
+import com.fontys.s3.grooveshare.business.RecommendationByGenreUseCase;
 import com.fontys.s3.grooveshare.business.dtos.postDtos.GetAllPostsRequest;
 import com.fontys.s3.grooveshare.business.dtos.postDtos.GetAllPostsResponse;
 import com.fontys.s3.grooveshare.business.dtos.postDtos.GetUserPostCountResponse;
@@ -60,6 +61,12 @@ class PostControllerTest {
 
     @MockBean
     private FindPostsByFollowersUseCase findPostsByFollowersUseCase;
+
+    @MockBean
+    private RecommendationByGenreUseCase recommendationByGenreUseCase;
+
+    @MockBean
+    private GetPostsByGenreIdUseCase getPostsByGenreIdUseCase;
 
 //    @Test
 //    @WithMockUser(username = "testuser", roles = "USER")

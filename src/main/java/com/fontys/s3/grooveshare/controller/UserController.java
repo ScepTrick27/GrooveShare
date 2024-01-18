@@ -7,9 +7,11 @@ import com.fontys.s3.grooveshare.business.dtos.FollowRequest;
 import com.fontys.s3.grooveshare.business.dtos.UnfollowRequest;
 import com.fontys.s3.grooveshare.business.dtos.userDtos.*;
 import com.fontys.s3.grooveshare.business.userInterface.*;
+import com.fontys.s3.grooveshare.configuration.security.token.AccessToken;
 import com.fontys.s3.grooveshare.domain.User;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -34,6 +36,9 @@ public class UserController {
     private final FollowUseCase followUseCase;
     private final UnfollowUseCase unfollowUseCase;
     private final IsFollowingUseCase isFollowingUseCase;
+
+    @Autowired
+    private AccessToken authenticatedUser;
 
     @GetMapping("{id}")
     public ResponseEntity<User> getUser(@PathVariable(value = "id") final long id) {
@@ -73,6 +78,12 @@ public class UserController {
     @PutMapping("{id}")
     public ResponseEntity<Void> updateUser(@PathVariable("id") long id,
                                            @RequestBody @Valid UpdateUserRequest request) {
+        long authenticatedUserId = authenticatedUser.getUserId();
+
+        if( id != authenticatedUserId){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
         request.setUserId(id);
         updateUserUseCase.updateUser(request);
         return ResponseEntity.noContent().build();

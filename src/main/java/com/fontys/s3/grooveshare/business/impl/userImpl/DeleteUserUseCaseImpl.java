@@ -1,5 +1,6 @@
 package com.fontys.s3.grooveshare.business.impl.userImpl;
 
+import com.fontys.s3.grooveshare.business.exception.InvalidUserIdException;
 import com.fontys.s3.grooveshare.business.userInterface.DeleteUserUseCase;
 import com.fontys.s3.grooveshare.persistance.FollowRepository;
 import com.fontys.s3.grooveshare.persistance.PostRepository;
@@ -23,16 +24,21 @@ public class DeleteUserUseCaseImpl implements DeleteUserUseCase {
     public void DeleteUser(Long userId) {
         Optional<UserEntity> user = userRepository.findById(userId);
 
+        if (user.isEmpty()) {
+            // Throw InvalidUserIdException if the user is not found
+            throw new InvalidUserIdException("User with ID " + userId + " not found.");
+        }
+
         // Remove all followers of the user
-        followRepository.deleteByFollowee(user.orElse(null));
+        followRepository.deleteByFollowee(user.get());
 
         // Remove all following relationships of the user
-        followRepository.deleteByFollower(user.orElse(null));
+        followRepository.deleteByFollower(user.get());
 
         // Delete user's posts
-        postRepository.deleteByUser(user.orElse(null));
+        postRepository.deleteByUser(user.get());
 
         // Delete the user
         userRepository.deleteById(userId);
     }
-}
+    }

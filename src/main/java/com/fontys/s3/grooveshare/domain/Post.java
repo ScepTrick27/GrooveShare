@@ -13,4 +13,7 @@ public class Post {
     private Long postId;
     private String content;
     private User user;
+    private Long likes;
+    private String trackId;
+    private Genre genre;
 }

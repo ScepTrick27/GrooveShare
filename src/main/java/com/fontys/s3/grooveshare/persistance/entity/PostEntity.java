@@ -18,12 +18,21 @@ public class PostEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
-private Long postId;
+    private Long postId;
+
     @Length(min =2, max = 250)
     @Column(name = "content")
-private String content;
+    private String content;
+
     @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id")
-private UserEntity user;
+    private UserEntity user;
+
+    @Column(name = "track_id")
+    private String trackId;
+
+    @ManyToOne
+    @JoinColumn(name = "genre_id")
+    private GenreEntity genre;
 }

@@ -1,9 +1,7 @@
 package com.fontys.s3.grooveshare.business.impl;
 
 import com.fontys.s3.grooveshare.business.FindPostsByFollowersUseCase;
-import com.fontys.s3.grooveshare.business.dtos.FindPostsByFollowersRequest;
 import com.fontys.s3.grooveshare.business.dtos.FindPostsByFollowersResponse;
-import com.fontys.s3.grooveshare.domain.Post;
 import com.fontys.s3.grooveshare.persistance.PostRepository;
 import com.fontys.s3.grooveshare.persistance.entity.PostEntity;
 import lombok.AllArgsConstructor;
@@ -22,6 +20,5 @@ private final PostRepository postRepository;
         response.setPosts(posts);
 
         return response;
-        //needed a modification
     }
 }

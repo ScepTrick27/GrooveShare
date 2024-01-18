@@ -34,4 +34,16 @@ class FindPostsByFollowersImplTest {
 
         assertEquals(mockPostEntities, response.getPosts());
     }
+
+    @Test
+    public void testFindPostsByLoggedInUserAndNoFollowers() {
+        Long userId = 1L;
+        when(postRepository.findPostsByLoggedInUserAndFollowers(userId)).thenReturn(Collections.emptyList());
+
+        FindPostsByFollowersResponse response = findPostsByFollowers.findPostsByLoggedInUserAndFollowers(userId);
+
+        assertNotNull(response);
+        assertNotNull(response.getPosts());
+        assertTrue(response.getPosts().isEmpty());
+    }
 }

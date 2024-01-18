@@ -22,4 +22,5 @@ public class CreateUserRequest {
     @NotNull
     private UserGenderEntity userGender;
     private UserRoleEntity userRole;
+    private byte[] photo;
 }

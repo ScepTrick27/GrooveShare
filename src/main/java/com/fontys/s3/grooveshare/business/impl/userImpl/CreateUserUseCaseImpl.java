@@ -41,6 +41,8 @@ public class CreateUserUseCaseImpl implements CreateUserUseCase {
                 .description(request.getDescription())
                 .userGender(request.getUserGender())
                 .userRole(role)
+                .photo(request.getPhoto())
+                .isVerified(false)
                 .build();
         return userRepository.save(newUser);
     }

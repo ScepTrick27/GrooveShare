@@ -3,6 +3,7 @@ package com.fontys.s3.grooveshare.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fontys.s3.grooveshare.business.dtos.postdto.*;
 import com.fontys.s3.grooveshare.business.post.*;
+import com.fontys.s3.grooveshare.configuration.security.token.AccessToken;
 import com.fontys.s3.grooveshare.domain.Genre;
 import com.fontys.s3.grooveshare.domain.Post;
 import org.junit.jupiter.api.Test;
@@ -44,6 +45,8 @@ class PostControllerTest {
     private GetPostUseCase getPostUseCase;
     @MockBean
     private GetPostsByGenreIdUseCase getPostsByGenreIdUseCase;
+    @MockBean
+    private AccessToken authenticatedUser;
 
 
     @Test
@@ -60,8 +63,10 @@ class PostControllerTest {
                 .content("Test Content")
                 .genreId(1L)
                 .build();
+//        LikePostResponse mockResponse = LikePostResponse.builder().success(true).build();
+//        when(likePostUseCase.likePost(request)).thenReturn(mockResponse);
 
-        when(createPostUseCase.createPost(any(CreatePostRequest.class))).thenReturn(response);
+        when(createPostUseCase.createPost(request)).thenReturn(response);
         mockMvc.perform(post("/posts")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))

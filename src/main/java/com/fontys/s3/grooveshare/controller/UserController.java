@@ -65,6 +65,11 @@ public class UserController {
 
     @DeleteMapping("{userId}")
     public ResponseEntity<Void> deleteUser(@PathVariable long userId) {
+        long authenticatedUserId = authenticatedUser.getUserId();
+
+        if( userId != authenticatedUserId){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
         deleteUserUseCase.deleteUser(userId);
         return ResponseEntity.noContent().build();
     }
@@ -102,6 +107,11 @@ public class UserController {
     }
     @PostMapping("/follow/{followerId}/{followeeId}")
     public ResponseEntity<Void> follow(@PathVariable Long followerId, @PathVariable Long followeeId) {
+        long authenticatedUserId = authenticatedUser.getUserId();
+
+        if( followerId != authenticatedUserId){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
         FollowRequest request = new FollowRequest(followerId, followeeId);
         followUseCase.follow(request);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -109,12 +119,22 @@ public class UserController {
 
     @PostMapping("/unfollow/{followerId}/{followeeId}")
     public ResponseEntity<Void> unfollow(@PathVariable Long followerId, @PathVariable Long followeeId) {
+        long authenticatedUserId = authenticatedUser.getUserId();
+
+        if( followerId != authenticatedUserId){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
         UnfollowRequest request = new UnfollowRequest(followerId, followeeId);
         unfollowUseCase.unfollow(request);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     @GetMapping("/isFollowing/{followerId}/{followeeId}")
     public ResponseEntity<Boolean> isFollowing(@PathVariable Long followerId, @PathVariable Long followeeId) {
+        long authenticatedUserId = authenticatedUser.getUserId();
+
+        if( followerId != authenticatedUserId){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
         boolean isFollowing = isFollowingUseCase.isFollowing(followerId, followeeId);
         return ResponseEntity.ok(isFollowing);
     }

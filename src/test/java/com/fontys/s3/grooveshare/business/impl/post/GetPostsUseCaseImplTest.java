@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,6 @@ class GetPostsUseCaseImplTest {
         UserEntity user1 = UserEntity.builder().userId(1L).username("user1").build();
         UserEntity user2 = UserEntity.builder().userId(2L).username("user2").build();
 
-        // Create a mock GenreEntity
         GenreEntity mockGenre = GenreEntity.builder().id(1L).genre("Rock").build();
 
         postEntities.add(PostEntity.builder().postId(1L).content("Post 1 content").user(user1).genre(mockGenre).build());
@@ -41,8 +41,8 @@ class GetPostsUseCaseImplTest {
 
         PageImpl<PostEntity> page = new PageImpl<>(postEntities);
 
-        // Use specific PageRequest instance
-        PageRequest pageRequest = PageRequest.of(1, 10);
+        // Use specific PageRequest instance with sorting
+        PageRequest pageRequest = PageRequest.of(1, 10, Sort.by("postId").descending());
         when(postRepository.getAllPosts(pageRequest)).thenReturn(page);
 
         GetAllPostsRequest request = GetAllPostsRequest.builder().page(1).size(10).build();
@@ -52,8 +52,8 @@ class GetPostsUseCaseImplTest {
         verify(postRepository, times(1)).getAllPosts(pageRequest);
 
         assertEquals(2, response.getPosts().size());
-        assertEquals("Post 1 content", response.getPosts().get(0).getContent());
         assertEquals("Post 2 content", response.getPosts().get(1).getContent());
+        assertEquals("Post 1 content", response.getPosts().get(0).getContent());
     }
 
     @Test

@@ -2,9 +2,6 @@ package com.fontys.s3.grooveshare.controller;
 
 import com.fontys.s3.grooveshare.business.*;
 import com.fontys.s3.grooveshare.business.dtos.*;
-import com.fontys.s3.grooveshare.business.dtos.postDtos.*;
-import com.fontys.s3.grooveshare.business.dtos.userDtos.UpdateUserRequest;
-import com.fontys.s3.grooveshare.domain.Post;
 import com.fontys.s3.grooveshare.domain.Verification;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;

@@ -1,12 +1,11 @@
 package com.fontys.s3.grooveshare.controller;
 
-import com.fontys.s3.grooveshare.business.dtos.userDtos.*;
-import com.fontys.s3.grooveshare.business.userInterface.GetUserUseCase;
-import com.fontys.s3.grooveshare.business.userInterface.GetUsersUseCase;
-import com.fontys.s3.grooveshare.business.userInterface.LogInUserUseCase;
-import com.fontys.s3.grooveshare.business.userInterface.UpdateUserUseCase;
+import com.fontys.s3.grooveshare.business.dtos.userdto.*;
+import com.fontys.s3.grooveshare.business.user.GetUserUseCase;
+import com.fontys.s3.grooveshare.business.user.GetUsersUseCase;
+import com.fontys.s3.grooveshare.business.user.LogInUserUseCase;
+import com.fontys.s3.grooveshare.business.user.UpdateUserUseCase;
 import com.fontys.s3.grooveshare.domain.User;
-import com.fontys.s3.grooveshare.persistance.entity.UserEntity;
 import com.fontys.s3.grooveshare.persistance.entity.UserGenderEntity;
 import com.fontys.s3.grooveshare.persistance.entity.UserRoleEntity;
 import org.junit.jupiter.api.Test;
@@ -14,10 +13,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.test.context.support.WithMockUser;
 
 
 import java.util.Optional;

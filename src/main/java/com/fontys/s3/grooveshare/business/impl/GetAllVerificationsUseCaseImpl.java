@@ -22,10 +22,7 @@ public class GetAllVerificationsUseCaseImpl implements GetAllVerificationsUseCas
         final GetAllVerificationsResponse response = new GetAllVerificationsResponse();
         List<Verification> verifications = results
                 .stream()
-                .map(verificationEntity -> {
-                    Verification verification = VerificationConverter.convert(verificationEntity);
-                    return verification;
-                })
+                .map(VerificationConverter::convert)
                 .toList();
         response.setVerificationList(verifications);
 

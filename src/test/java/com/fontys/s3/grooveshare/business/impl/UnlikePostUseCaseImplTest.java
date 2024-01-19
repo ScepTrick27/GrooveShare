@@ -38,7 +38,7 @@ class UnlikePostUseCaseImplTest {
         // Arrange
         LikePostRequest request = new LikePostRequest(1L, 1L);
         LikeEntity mockLikeEntity = new LikeEntity();
-        Mockito.when(likeRepository.findByUserUserIdAndPostPostId(eq(1L), eq(1L)))
+        Mockito.when(likeRepository.findByUserUserIdAndPostPostId(1L, 1L))
                 .thenReturn(Optional.of(mockLikeEntity));
 
         // Act
@@ -46,14 +46,14 @@ class UnlikePostUseCaseImplTest {
 
         // Assert
         assertTrue(response.isSuccess());
-        Mockito.verify(likeRepository, Mockito.times(1)).delete(eq(mockLikeEntity));
+        Mockito.verify(likeRepository, Mockito.times(1)).delete(mockLikeEntity);
     }
 
     @Test
     void unlikePost_NoLikeFound() {
         // Arrange
         LikePostRequest request = new LikePostRequest(1L, 1L);
-        Mockito.when(likeRepository.findByUserUserIdAndPostPostId(eq(1L), eq(1L)))
+        Mockito.when(likeRepository.findByUserUserIdAndPostPostId(1L, 1L))
                 .thenReturn(Optional.empty());
 
         // Act

@@ -5,8 +5,8 @@ import com.fontys.s3.grooveshare.business.IsFollowingUseCase;
 import com.fontys.s3.grooveshare.business.UnfollowUseCase;
 import com.fontys.s3.grooveshare.business.dtos.FollowRequest;
 import com.fontys.s3.grooveshare.business.dtos.UnfollowRequest;
-import com.fontys.s3.grooveshare.business.dtos.userDtos.*;
-import com.fontys.s3.grooveshare.business.userInterface.*;
+import com.fontys.s3.grooveshare.business.dtos.userdto.*;
+import com.fontys.s3.grooveshare.business.user.*;
 import com.fontys.s3.grooveshare.configuration.security.token.AccessToken;
 import com.fontys.s3.grooveshare.domain.User;
 import jakarta.validation.Valid;
@@ -65,7 +65,7 @@ public class UserController {
 
     @DeleteMapping("{userId}")
     public ResponseEntity<Void> deleteUser(@PathVariable long userId) {
-        deleteUserUseCase.DeleteUser(userId);
+        deleteUserUseCase.deleteUser(userId);
         return ResponseEntity.noContent().build();
     }
 

@@ -22,7 +22,7 @@ class IsLikedUseCaseImplTest {
     private IsLikedUseCaseImpl isLikedUseCase;
 
     @Test
-    public void isLiked_ReturnsTrue_WhenUserLikedPost() {
+    void isLiked_ReturnsTrue_WhenUserLikedPost() {
         LikePostRequest request = new LikePostRequest(1L, 2L); // Replace with actual user and post IDs
         when(likeRepository.existsByUserUserIdAndPostPostId(request.getUserId(), request.getPostId())).thenReturn(true);
 
@@ -32,7 +32,7 @@ class IsLikedUseCaseImplTest {
     }
 
     @Test
-    public void isLiked_ReturnsFalse_WhenUserDidNotLikePost() {
+    void isLiked_ReturnsFalse_WhenUserDidNotLikePost() {
         LikePostRequest request = new LikePostRequest(1L, 2L); // Replace with actual user and post IDs
         when(likeRepository.existsByUserUserIdAndPostPostId(request.getUserId(), request.getPostId())).thenReturn(false);
 

@@ -2,8 +2,6 @@ package com.fontys.s3.grooveshare.controller;
 
 import com.fontys.s3.grooveshare.business.dtos.GetAllGenresRequest;
 import com.fontys.s3.grooveshare.business.dtos.GetAllGenresResponse;
-import com.fontys.s3.grooveshare.business.dtos.postDtos.GetAllPostsRequest;
-import com.fontys.s3.grooveshare.business.dtos.postDtos.GetAllPostsResponse;
 import com.fontys.s3.grooveshare.business.GetAllGenresUseCse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

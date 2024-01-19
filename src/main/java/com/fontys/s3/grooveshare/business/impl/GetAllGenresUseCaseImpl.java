@@ -22,10 +22,7 @@ public class GetAllGenresUseCaseImpl implements GetAllGenresUseCse {
         final GetAllGenresResponse response = new GetAllGenresResponse();
         List<Genre> genres = results
                 .stream()
-                .map(genreEntity -> {
-                    Genre genre = GenreConvertor.convert(genreEntity);
-                    return genre;
-                })
+                .map(genreEntity -> GenreConvertor.convert(genreEntity))
                 .toList();
         response.setGenres(genres);
 

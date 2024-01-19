@@ -2,7 +2,7 @@ package com.fontys.s3.grooveshare.business.impl;
 
 import com.fontys.s3.grooveshare.business.RecommendationByGenreUseCase;
 import com.fontys.s3.grooveshare.business.dtos.RecommendationByGenreResponse;
-import com.fontys.s3.grooveshare.business.impl.postImpl.PostConverter;
+import com.fontys.s3.grooveshare.business.impl.post.PostConverter;
 import com.fontys.s3.grooveshare.domain.Genre;
 import com.fontys.s3.grooveshare.domain.Post;
 import com.fontys.s3.grooveshare.persistance.PostRepository;
@@ -26,7 +26,7 @@ public class RecommendationByGenreUseCaseImpl implements RecommendationByGenreUs
 
         List<Genre> likedGenres = likedPosts.stream()
                 .map(postEntity -> GenreConvertor.convert(postEntity.getGenre()))
-                .collect(Collectors.toList());
+                .toList();
 
         List<Genre> topGenres = calculateTopGenres(likedGenres);
 
@@ -44,7 +44,7 @@ public class RecommendationByGenreUseCaseImpl implements RecommendationByGenreUs
         List<Post> recommendedPosts = posts.stream()
                 .filter(post -> topGenres.contains(post.getGenre()))
                 .sorted(Comparator.comparingLong(Post::getLikes).reversed())
-                .collect(Collectors.toList());
+                .toList();
 
         return new RecommendationByGenreResponse(recommendedPosts);
     }
@@ -57,7 +57,7 @@ public class RecommendationByGenreUseCaseImpl implements RecommendationByGenreUs
                 .sorted(Map.Entry.<Genre, Long>comparingByValue().reversed())
                 .limit(5)
                 .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
+                .toList();
     }
 
 }

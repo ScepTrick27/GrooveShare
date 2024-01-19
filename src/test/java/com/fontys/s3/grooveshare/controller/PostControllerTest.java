@@ -1,28 +1,21 @@
 package com.fontys.s3.grooveshare.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fontys.s3.grooveshare.business.FindPostsByFollowersUseCase;
-import com.fontys.s3.grooveshare.business.RecommendationByGenreUseCase;
-import com.fontys.s3.grooveshare.business.dtos.postDtos.*;
-import com.fontys.s3.grooveshare.business.postInterface.*;
-import com.fontys.s3.grooveshare.config.TestConfig;
+import com.fontys.s3.grooveshare.business.dtos.postdto.*;
+import com.fontys.s3.grooveshare.business.post.*;
 import com.fontys.s3.grooveshare.domain.Genre;
 import com.fontys.s3.grooveshare.domain.Post;
-import com.fontys.s3.grooveshare.persistance.PostRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,6 @@
 package com.fontys.s3.grooveshare.domain;
 
 import com.fontys.s3.grooveshare.persistance.entity.VerificationStatusEntity;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

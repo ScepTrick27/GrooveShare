@@ -1,6 +1,5 @@
 package com.fontys.s3.grooveshare.persistance;
 
-import com.fontys.s3.grooveshare.domain.Verification;
 import com.fontys.s3.grooveshare.persistance.entity.VerificationEntity;
 import com.fontys.s3.grooveshare.persistance.entity.VerificationStatusEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

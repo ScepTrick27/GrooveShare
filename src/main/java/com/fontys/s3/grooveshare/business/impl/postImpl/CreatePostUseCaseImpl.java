@@ -25,19 +25,16 @@ public class CreatePostUseCaseImpl implements CreatePostUseCase {
     @Transactional
     @Override
     public CreatePostResponse createPost(CreatePostRequest request) {
-        // Check if the user exists
         Optional<UserEntity> user = userRepository.findById(request.getUserId());
         if (user.isEmpty()) {
             throw new IllegalArgumentException("User with ID " + request.getUserId() + " does not exist");
         }
 
-        // Check if the genre exists
         Optional<GenreEntity> genre = genreRepository.findById(request.getGenreId());
         if (genre.isEmpty()) {
             throw new IllegalArgumentException("Genre with ID " + request.getGenreId() + " does not exist");
         }
 
-        // Create and save the post
         PostEntity savedPost = saveNewPost(request);
 
         return CreatePostResponse.builder()
@@ -60,7 +57,6 @@ public class CreatePostUseCaseImpl implements CreatePostUseCase {
                     .build();
             return postRepository.save(newPost);
         } else {
-            // This should not be reached due to the earlier check
             throw new IllegalStateException("User with ID " + request.getUserId() + " does not exist");
         }
     }

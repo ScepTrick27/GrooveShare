@@ -21,6 +21,10 @@ public class LikeController {
 
     @PostMapping("/like")
     public ResponseEntity<LikePostResponse> likePost(@RequestBody LikePostRequest request) {
+        if (request == null || request.getUserId() == null || request.getPostId() == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
         LikePostResponse response = likePostUseCase.likePost(request);
         return ResponseEntity.ok(response);
     }

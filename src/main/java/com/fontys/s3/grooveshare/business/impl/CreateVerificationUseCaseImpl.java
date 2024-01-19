@@ -3,8 +3,6 @@ package com.fontys.s3.grooveshare.business.impl;
 import com.fontys.s3.grooveshare.business.CreateVerificationUseCase;
 import com.fontys.s3.grooveshare.business.dtos.CreateVerificationRequest;
 import com.fontys.s3.grooveshare.business.dtos.CreateVerificationResponse;
-import com.fontys.s3.grooveshare.business.dtos.postDtos.CreatePostRequest;
-import com.fontys.s3.grooveshare.business.dtos.postDtos.CreatePostResponse;
 import com.fontys.s3.grooveshare.persistance.UserRepository;
 import com.fontys.s3.grooveshare.persistance.VerificationRepository;
 import com.fontys.s3.grooveshare.persistance.entity.*;

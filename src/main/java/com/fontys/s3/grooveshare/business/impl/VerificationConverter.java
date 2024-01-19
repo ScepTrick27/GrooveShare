@@ -1,10 +1,8 @@
 package com.fontys.s3.grooveshare.business.impl;
 
 import com.fontys.s3.grooveshare.business.impl.userImpl.UserConverter;
-import com.fontys.s3.grooveshare.domain.Genre;
 import com.fontys.s3.grooveshare.domain.User;
 import com.fontys.s3.grooveshare.domain.Verification;
-import com.fontys.s3.grooveshare.persistance.entity.GenreEntity;
 import com.fontys.s3.grooveshare.persistance.entity.VerificationEntity;
 
 public class VerificationConverter {

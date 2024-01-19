@@ -3,15 +3,17 @@ package com.fontys.s3.grooveshare.controller;
 import com.fontys.s3.grooveshare.business.GetAllGenresUseCse;
 import com.fontys.s3.grooveshare.business.dtos.GetAllGenresRequest;
 import com.fontys.s3.grooveshare.business.dtos.GetAllGenresResponse;
-import com.fontys.s3.grooveshare.config.TestConfig;
 import com.fontys.s3.grooveshare.domain.Genre;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
@@ -23,9 +25,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(GenreController.class)
-@WithMockUser(username = "testuser", roles = "USER")
-@Import(TestConfig.class)
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
+@AutoConfigureMockMvc
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 class GenreControllerTest {
     @Autowired
     private MockMvc mockMvc;
@@ -34,6 +37,7 @@ class GenreControllerTest {
     private GetAllGenresUseCse getAllGenresUseCse;
 
     @Test
+    @WithMockUser(username = "testuser", roles = "USER")
     void testGetAllGenres() throws Exception {
         GetAllGenresResponse response = GetAllGenresResponse.builder()
                 .genres(Arrays.asList(
@@ -54,6 +58,7 @@ class GenreControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "testuser", roles = "USER")
     void testGetAllGenresFailure() throws Exception {
         // Arrange
         GetAllGenresRequest request = GetAllGenresRequest.builder().build();

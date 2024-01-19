@@ -1,16 +1,11 @@
 package com.fontys.s3.grooveshare.business.impl.postImpl;
 
-import com.fontys.s3.grooveshare.business.impl.GenreConvertor;
-import com.fontys.s3.grooveshare.business.impl.userImpl.UserConverter;
-import com.fontys.s3.grooveshare.domain.Genre;
 import com.fontys.s3.grooveshare.domain.Post;
-import com.fontys.s3.grooveshare.domain.User;
 import com.fontys.s3.grooveshare.persistance.entity.GenreEntity;
 import com.fontys.s3.grooveshare.persistance.entity.PostEntity;
 import com.fontys.s3.grooveshare.persistance.entity.UserEntity;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;

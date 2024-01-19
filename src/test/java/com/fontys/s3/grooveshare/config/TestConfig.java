@@ -8,8 +8,8 @@ import static org.mockito.Mockito.mock;
 
 @Configuration
 public class TestConfig {
-        @Bean
-        public AccessTokenEncoderDecoderImpl mockAccessTokenEncoderDecoder() {
-            return mock(AccessTokenEncoderDecoderImpl.class);
-        }
+//        @Bean
+//        public AccessTokenEncoderDecoderImpl mockAccessTokenEncoderDecoder() {
+//            return mock(AccessTokenEncoderDecoderImpl.class);
+//        }
     }

@@ -2,7 +2,6 @@ package com.fontys.s3.grooveshare.business.impl.postImpl;
 
 import com.fontys.s3.grooveshare.business.dtos.postDtos.GetAllPostsRequest;
 import com.fontys.s3.grooveshare.business.dtos.postDtos.GetAllPostsResponse;
-import com.fontys.s3.grooveshare.business.impl.postImpl.GetPostsUseCaseImpl;
 import com.fontys.s3.grooveshare.persistance.PostRepository;
 import com.fontys.s3.grooveshare.persistance.entity.GenreEntity;
 import com.fontys.s3.grooveshare.persistance.entity.PostEntity;
@@ -16,7 +15,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;

@@ -1,6 +1,5 @@
 package com.fontys.s3.grooveshare.business.impl.postImpl;
 
-import com.fontys.s3.grooveshare.business.impl.postImpl.DeletePostUseCaseImpl;
 import com.fontys.s3.grooveshare.persistance.PostRepository;
 import com.fontys.s3.grooveshare.persistance.UserRepository;
 import org.junit.jupiter.api.Test;

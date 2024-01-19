@@ -1,13 +1,10 @@
 package com.fontys.s3.grooveshare.business.impl;
 
 import com.fontys.s3.grooveshare.business.RecommendationByGenreUseCase;
-import com.fontys.s3.grooveshare.business.dtos.RecommendationByGenreRequest;
 import com.fontys.s3.grooveshare.business.dtos.RecommendationByGenreResponse;
-import com.fontys.s3.grooveshare.business.dtos.postDtos.GetAllPostsResponse;
 import com.fontys.s3.grooveshare.business.impl.postImpl.PostConverter;
 import com.fontys.s3.grooveshare.domain.Genre;
 import com.fontys.s3.grooveshare.domain.Post;
-import com.fontys.s3.grooveshare.persistance.LikeRepository;
 import com.fontys.s3.grooveshare.persistance.PostRepository;
 import com.fontys.s3.grooveshare.persistance.entity.PostEntity;
 import lombok.AllArgsConstructor;

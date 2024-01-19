@@ -2,11 +2,8 @@ package com.fontys.s3.grooveshare.business.impl;
 
 import com.fontys.s3.grooveshare.business.UpdateVerificationUseCase;
 import com.fontys.s3.grooveshare.business.dtos.UpdateVerificationRequest;
-import com.fontys.s3.grooveshare.business.dtos.userDtos.UpdateUserRequest;
 import com.fontys.s3.grooveshare.business.exception.InvalidUserIdException;
-import com.fontys.s3.grooveshare.persistance.UserRepository;
 import com.fontys.s3.grooveshare.persistance.VerificationRepository;
-import com.fontys.s3.grooveshare.persistance.entity.UserEntity;
 import com.fontys.s3.grooveshare.persistance.entity.VerificationEntity;
 import com.fontys.s3.grooveshare.persistance.entity.VerificationStatusEntity;
 import jakarta.transaction.Transactional;

@@ -3,7 +3,6 @@ package com.fontys.s3.grooveshare.business.impl;
 import com.fontys.s3.grooveshare.business.UnlikePostUseCase;
 import com.fontys.s3.grooveshare.business.dtos.LikePostRequest;
 import com.fontys.s3.grooveshare.business.dtos.LikePostResponse;
-import com.fontys.s3.grooveshare.domain.Like;
 import com.fontys.s3.grooveshare.persistance.LikeRepository;
 import com.fontys.s3.grooveshare.persistance.PostRepository;
 import com.fontys.s3.grooveshare.persistance.UserRepository;

@@ -35,9 +35,9 @@ test:
 deploy_backend:
   stage: deploy
   script:
-    - docker stop grooveshare-backend || $true
-    - docker rm grooveshare-backend || $true
-    - docker run -d -p 8090:8080 --net=docker_demo_network_staging --env spring_profiles_active=staging --name grooveshare-backend $BACKEND_IMAGE
+    - docker stop grooveshare-be || $true
+    - docker rm grooveshare-be || $true
+    - docker run -d -p 8090:8080 --net=docker_demo_network_staging --env spring_profiles_active=staging --name grooveshare-be $BACKEND_IMAGE
 
 deploy_database:
   stage: deploy

@@ -36,10 +36,8 @@ class IsLikedUseCaseImplTest {
         LikePostRequest request = new LikePostRequest(1L, 2L); // Replace with actual user and post IDs
         when(likeRepository.existsByUserUserIdAndPostPostId(request.getUserId(), request.getPostId())).thenReturn(false);
 
-        // Act
         IsLikedResponse response = isLikedUseCase.isLiked(request);
 
-        // Assert
         assertFalse(response.isLiked());
     }
 }

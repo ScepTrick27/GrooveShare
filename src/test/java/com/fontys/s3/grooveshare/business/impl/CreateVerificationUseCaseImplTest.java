@@ -32,18 +32,15 @@ class CreateVerificationUseCaseImplTest {
     @Test
     void createVerification_WithValidUserId_ShouldReturnCreateVerificationResponse() {
         byte[] photo = {1};
-        // Arrange
         CreateVerificationRequest request = CreateVerificationRequest.builder()
-                .userId(14L)  // Set a valid userId for testing
+                .userId(14L)
                 .verificationPhoto(photo)
                 .build();
 
-        // Act
         CreateVerificationResponse response = createVerificationUseCase.createVerification(request);
         response.setUserId(request.getUserId());
         response.setStatus("PENDING");
 
-        // Assert
         assertNotNull(response);
         assertNotNull(response.getUserId(), "User ID should not be null");
         assertEquals("PENDING", response.getStatus());
@@ -51,16 +48,13 @@ class CreateVerificationUseCaseImplTest {
 
     @Test
     void createVerification_WithInvalidUserId_ShouldReturnEmptyResponse() {
-        // Arrange
         Long invalidUserId = 2L;
         byte[] photo = {1};
         CreateVerificationRequest request = new CreateVerificationRequest(invalidUserId, photo);
         when(userRepository.findById(invalidUserId)).thenReturn(Optional.empty());
 
-        // Act
         CreateVerificationResponse response = createVerificationUseCase.createVerification(request);
 
-        // Assert
         assertNotNull(response);
         assertNull(response.getUserId());
         assertNull(response.getStatus());

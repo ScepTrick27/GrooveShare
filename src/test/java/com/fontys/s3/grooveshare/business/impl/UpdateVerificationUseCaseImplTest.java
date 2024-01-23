@@ -30,39 +30,32 @@ class UpdateVerificationUseCaseImplTest {
 
     @Test
     void updateVerification_ValidVerificationId_Success() {
-        // Arrange
         VerificationEntity verificationEntity = new VerificationEntity();
         verificationEntity.setId(1L);
-        UserEntity user = new UserEntity(); // Create a User object as needed
+        UserEntity user = new UserEntity();
         verificationEntity.setUser(user);
-        verificationEntity.setVerificationPhoto(new byte[0]); // Provide a sample photo
-        verificationEntity.setStatus(VerificationStatusEntity.PENDING); // Initial status
+        verificationEntity.setVerificationPhoto(new byte[0]);
+        verificationEntity.setStatus(VerificationStatusEntity.PENDING);
 
         when(verificationRepository.findById(1L)).thenReturn(Optional.of(verificationEntity));
 
         UpdateVerificationRequest updateRequest = new UpdateVerificationRequest();
         updateRequest.setVerificationId(1L);
-        updateRequest.setVerificationStatus("ACCEPTED"); // Provide a valid status
+        updateRequest.setVerificationStatus("ACCEPTED");
 
-        // Act
         updateVerificationUseCase.updateVerification(updateRequest);
 
-        // Assert
         verify(verificationRepository, times(1)).findById(1L);
 
-        // Additional assertions if needed
         assertEquals(VerificationStatusEntity.ACCEPTED, verificationEntity.getStatus());
     }
     @Test
     void updateVerification_InvalidVerificationId_ThrowsException() {
-        // Arrange
         UpdateVerificationRequest request = new UpdateVerificationRequest(2L, "ACCEPTED");
         when(verificationRepository.findById(2L)).thenReturn(Optional.empty());
 
-        // Act and Assert
         assertThrows(InvalidUserIdException.class, () -> updateVerificationUseCase.updateVerification(request));
 
-        // Verify that findById is called
         verify(verificationRepository, times(1)).findById(2L);
     }
 }

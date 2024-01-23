@@ -14,15 +14,12 @@ import static org.mockito.Mockito.when;
 class GenreConvertorTest {
     @Test
     void convert_ShouldConvertGenreEntityToGenre() {
-        // Arrange
         GenreEntity genreEntity = mock(GenreEntity.class);
         when(genreEntity.getId()).thenReturn(1L);
         when(genreEntity.getGenre()).thenReturn("Rock");
 
-        // Act
         Genre convertedGenre = GenreConvertor.convert(genreEntity);
 
-        // Assert
         assertEquals(genreEntity.getId(), convertedGenre.getId());
         assertEquals(genreEntity.getGenre(), convertedGenre.getGenre());
     }

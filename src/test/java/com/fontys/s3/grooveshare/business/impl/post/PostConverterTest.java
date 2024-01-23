@@ -17,7 +17,6 @@ class PostConverterTest {
 
     @Test
     void convert_ShouldConvertPostEntityToPost() {
-        // Arrange
         PostEntity postEntity = mock(PostEntity.class);
         when(postEntity.getPostId()).thenReturn(1L);
         when(postEntity.getContent()).thenReturn("Test content");
@@ -32,10 +31,8 @@ class PostConverterTest {
         when(postEntity.getUser()).thenReturn(userEntity);
         when(postEntity.getGenre()).thenReturn(genreEntity);
 
-        // Act
         Post convertedPost = PostConverter.convert(postEntity);
 
-        // Assert
         assertEquals(postEntity.getPostId(), convertedPost.getPostId());
         assertEquals(postEntity.getContent(), convertedPost.getContent());
         assertEquals(postEntity.getTrackId(), convertedPost.getTrackId());

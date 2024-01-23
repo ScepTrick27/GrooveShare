@@ -75,7 +75,6 @@ class UserControllerTest {
 
     @Test
     void testGetAllUsers() {
-        // Arrange
         int page = 0;
         int size = 10;
 
@@ -88,26 +87,12 @@ class UserControllerTest {
 
         when(getUsersUseCase.getUsers(expectedRequest)).thenReturn(expectedResponse);
 
-        // Act
         ResponseEntity<GetAllUsersResponse> responseEntity = userController.getAllUsers(page, size);
 
-        // Assert
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(expectedResponse, responseEntity.getBody());
     }
 
-//    @Test
-//    @WithMockUser(username = "testuser", roles = "USER")
-//    void testUpdateUser() {
-//        long userId = 1L;
-//        UpdateUserRequest updateRequest = new UpdateUserRequest(/* provide necessary data for the request */);
-//
-//        ResponseEntity<Void> responseEntity = userController.updateUser(userId, updateRequest);
-//
-//        assertEquals(204, responseEntity.getStatusCodeValue()); // 204 for no content
-//
-//        verify(updateUserUseCase, times(1)).updateUser(updateRequest);
-//    }
 
     @Test
     void testLogin() {

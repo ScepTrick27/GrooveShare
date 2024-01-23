@@ -30,7 +30,6 @@ class GetPostsByGenreIdUseCaseImplTest {
 
     @Test
     void getPostsByGenreId_WithValidGenreId_ShouldReturnPosts() {
-        // Arrange
         Long genreId = 1L;
         GetPostsByGenreIdRequest request = new GetPostsByGenreIdRequest(genreId);
         UserEntity userEntity = UserEntity.builder()
@@ -57,10 +56,8 @@ class GetPostsByGenreIdUseCaseImplTest {
         when(postRepository.findByGenreId(genreId)).thenReturn(postEntities);
         when(postRepository.countLikesForPost(anyLong())).thenReturn(0L);
 
-        // Act
         GetPostsByGenreIdResponse response = getPostsByGenreIdUseCase.getPostsByGenreId(request);
 
-        // Assert
         assertFalse(response.getPosts().isEmpty());
         assertEquals(1, response.getPosts().size());
         assertEquals("Test post content", response.getPosts().get(0).getContent());
@@ -68,15 +65,12 @@ class GetPostsByGenreIdUseCaseImplTest {
 
     @Test
     void getPostsByGenreId_WithInvalidGenreId_ShouldReturnEmptyList() {
-        // Arrange
         Long genreId = 1L;
         GetPostsByGenreIdRequest request = new GetPostsByGenreIdRequest(genreId);
         when(postRepository.findByGenreId(genreId)).thenReturn(Collections.emptyList());
 
-        // Act
         GetPostsByGenreIdResponse response = getPostsByGenreIdUseCase.getPostsByGenreId(request);
 
-        // Assert
         assertTrue(response.getPosts().isEmpty());
     }
 

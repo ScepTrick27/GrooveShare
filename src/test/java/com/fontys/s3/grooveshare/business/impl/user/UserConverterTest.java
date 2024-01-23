@@ -16,7 +16,6 @@ import static org.mockito.Mockito.when;
 class UserConverterTest {
     @Test
     void convert_ShouldConvertUserEntityToUser() {
-        // Arrange
         UserEntity userEntity = mock(UserEntity.class);
         when(userEntity.getUserId()).thenReturn(1L);
         when(userEntity.getUsername()).thenReturn("TestUser");
@@ -27,10 +26,8 @@ class UserConverterTest {
         when(userEntity.getPhoto()).thenReturn(new byte[0]);
         when(userEntity.isVerified()).thenReturn(true);
 
-        // Act
         User convertedUser = UserConverter.convert(userEntity);
 
-        // Assert
         assertEquals(userEntity.getUserId(), convertedUser.getUserId());
         assertEquals(userEntity.getUsername(), convertedUser.getUsername());
         assertEquals(userEntity.getPassword(), convertedUser.getPassword());
@@ -43,13 +40,10 @@ class UserConverterTest {
 
     @Test
     void convert_WithNullUserEntity_ShouldReturnNull() {
-        // Arrange
         UserEntity userEntity = null;
 
-        // Act
         User convertedUser = UserConverter.convert(userEntity);
 
-        // Assert
         assertNull(convertedUser);
     }
 }

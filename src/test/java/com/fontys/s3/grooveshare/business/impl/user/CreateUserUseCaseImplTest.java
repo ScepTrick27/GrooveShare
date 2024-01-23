@@ -35,7 +35,6 @@ class CreateUserUseCaseImplTest {
 
     @Test
     void createUserShouldCreateANewUser() {
-        // Mock data
         CreateUserRequest request = CreateUserRequest.builder()
                 .username("test1")
                 .password("test1")
@@ -53,16 +52,13 @@ class CreateUserUseCaseImplTest {
                 .userId(1L)
                 .build();
 
-        // Mocking behavior
         when(roleRepository.findByRole(RoleEnum.USER)).thenReturn(mockedRole);
         when(passwordEncoder.encode("test1")).thenReturn("encodedPassword");
         when(userRepository.save(any(UserEntity.class))).thenReturn(savedUser);
 
-        // Test the method
         CreateUserResponse actual = createUserUseCase.createUser(request);
         CreateUserResponse expected = CreateUserResponse.builder().userId(1L).build();
 
-        // Verify the interactions and assertions
         assertEquals(expected, actual);
 
         verify(roleRepository).findByRole(RoleEnum.USER);

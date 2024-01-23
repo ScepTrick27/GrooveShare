@@ -26,30 +26,24 @@ class GetAllGenresUseCaseImplTest {
 
     @Test
     void getAllGenres_ReturnsEmptyList_WhenNoGenresInRepository() {
-        // Arrange
         when(genreRepository.findAll()).thenReturn(List.of());
 
-        // Act
         GetAllGenresResponse response = getAllGenresUseCase.getAllGenres(new GetAllGenresRequest());
 
-        // Assert
         assertEquals(0, response.getGenres().size());
         verify(genreRepository, times(1)).findAll();
     }
 
     @Test
     void getAllGenres_ReturnsGenres_WhenGenresInRepository() {
-        // Arrange
         List<GenreEntity> genreEntities = Arrays.asList(
                 new GenreEntity(1L, "Rock"),
                 new GenreEntity(2L, "Pop")
         );
         when(genreRepository.findAll()).thenReturn(genreEntities);
 
-        // Act
         GetAllGenresResponse response = getAllGenresUseCase.getAllGenres(new GetAllGenresRequest());
 
-        // Assert
         assertEquals(2, response.getGenres().size());
         assertEquals("Rock", response.getGenres().get(0).getGenre());
         assertEquals("Pop", response.getGenres().get(1).getGenre());

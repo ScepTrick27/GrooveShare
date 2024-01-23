@@ -63,8 +63,6 @@ class PostControllerTest {
                 .content("Test Content")
                 .genreId(1L)
                 .build();
-//        LikePostResponse mockResponse = LikePostResponse.builder().success(true).build();
-//        when(likePostUseCase.likePost(request)).thenReturn(mockResponse);
 
         when(createPostUseCase.createPost(request)).thenReturn(response);
         mockMvc.perform(post("/posts")

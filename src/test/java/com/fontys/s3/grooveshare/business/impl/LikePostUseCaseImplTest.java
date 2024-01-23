@@ -33,7 +33,6 @@ class LikePostUseCaseImplTest {
 
     @Test
     void likePost_SuccessfullyLikedPost() {
-        // Arrange
         Long userId = 1L;
         Long postId = 2L;
 
@@ -51,17 +50,14 @@ class LikePostUseCaseImplTest {
         when(postRepository.getById(postId)).thenReturn(post);
         when(likeRepository.existsByUserUserIdAndPostPostId(userId, postId)).thenReturn(false);
 
-        // Act
         LikePostResponse response = likePostUseCase.likePost(request);
 
-        // Assert
         assertTrue(response.isSuccess());
         verify(likeRepository, times(1)).save(any(LikeEntity.class));
     }
 
     @Test
     void likePost_UserAlreadyLikedPost() {
-        // Arrange
         Long userId = 1L;
         Long postId = 2L;
 
@@ -71,10 +67,8 @@ class LikePostUseCaseImplTest {
 
         when(likeRepository.existsByUserUserIdAndPostPostId(userId, postId)).thenReturn(true);
 
-        // Act
         LikePostResponse response = likePostUseCase.likePost(request);
 
-        // Assert
         assertFalse(response.isSuccess());
         verify(userRepository, never()).getById(anyLong());
         verify(postRepository, never()).getById(anyLong());

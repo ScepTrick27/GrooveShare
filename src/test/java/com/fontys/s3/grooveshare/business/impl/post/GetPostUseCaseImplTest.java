@@ -26,12 +26,10 @@ class GetPostUseCaseImplTest {
 
     @Test
     void getPost_WithValidPostId_ShouldReturnPost() {
-        // Create a mock GenreEntity
         GenreEntity mockGenre = GenreEntity.builder().id(1L).genre("Rock").build();
 
         UserEntity user1 = UserEntity.builder().userId(1L).username("user1").build();
 
-        // Create a PostEntity with the mock GenreEntity
         PostEntity expectedPost = PostEntity.builder().postId(1L).content("Post 1 content").user(user1).genre(mockGenre).build();
 
         Long postId = 1L;

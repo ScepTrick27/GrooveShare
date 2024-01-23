@@ -41,14 +41,12 @@ class GetPostsUseCaseImplTest {
 
         PageImpl<PostEntity> page = new PageImpl<>(postEntities);
 
-        // Use specific PageRequest instance with sorting
         PageRequest pageRequest = PageRequest.of(1, 10, Sort.by("postId").descending());
         when(postRepository.getAllPosts(pageRequest)).thenReturn(page);
 
         GetAllPostsRequest request = GetAllPostsRequest.builder().page(1).size(10).build();
         GetAllPostsResponse response = getPostsUseCase.getPosts(request);
 
-        // Verify using the exact PageRequest instance
         verify(postRepository, times(1)).getAllPosts(pageRequest);
 
         assertEquals(2, response.getPosts().size());
@@ -58,10 +56,8 @@ class GetPostsUseCaseImplTest {
 
     @Test
     void getPosts_EmptyList_ThrowsIllegalArgumentException() {
-        // Trying to create a PageRequest with a page size less than one
         GetAllPostsRequest request = GetAllPostsRequest.builder().page(0).size(0).build();
 
-        // Verify that an IllegalArgumentException is thrown
         assertThrows(IllegalArgumentException.class, () -> getPostsUseCase.getPosts(request));
     }
 

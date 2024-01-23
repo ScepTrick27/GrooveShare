@@ -27,10 +27,8 @@ class RecommendationByGenreUseCaseImplTest {
 
     @Test
     void getRecommendedPosts_ReturnsCorrectResponse() {
-        // Arrange
         Long userId = 1L;
 
-        // Mocking liked posts and their genres
         List<PostEntity> likedPosts = Arrays.asList(
                 createMockPostEntity(1L, "Rock"),
                 createMockPostEntity(2L, "Pop"),
@@ -46,16 +44,13 @@ class RecommendationByGenreUseCaseImplTest {
                 createMockPostEntity(8L, "Rock")
         ));
 
-        // Act
         RecommendationByGenreResponse response = recommendationByGenreUseCase.getRecommendedPosts(userId);
 
-        // Assert
         assertEquals(4, response.getRecommendedPosts().size());
         assertEquals(5L, response.getRecommendedPosts().get(0).getPostId());
         assertEquals(6L, response.getRecommendedPosts().get(1).getPostId());
         assertEquals(7L, response.getRecommendedPosts().get(2).getPostId());
 
-        // Verify that the repository methods were called
         verify(postRepository, times(1)).findLikedPostsByUserId(userId);
         verify(postRepository, times(1)).findAll();
         verify(postRepository, times(4)).countLikesForPost(anyLong());
@@ -63,7 +58,7 @@ class RecommendationByGenreUseCaseImplTest {
 
     private PostEntity createMockPostEntity(Long postId, String genreName) {
         GenreEntity genreEntity = new GenreEntity();
-        genreEntity.setId(1L); // Assuming a valid ID for the GenreEntity
+        genreEntity.setId(1L);
 
         PostEntity postEntity = new PostEntity();
         postEntity.setPostId(postId);

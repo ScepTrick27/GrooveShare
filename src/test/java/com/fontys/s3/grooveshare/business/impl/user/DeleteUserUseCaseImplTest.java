@@ -53,10 +53,8 @@ class DeleteUserUseCaseImplTest {
 
         when(userRepository.findById(userIdToDelete)).thenReturn(Optional.empty());
 
-        // Assert that InvalidUserIdException is thrown
         assertThrows(InvalidUserIdException.class, () -> deleteUserUseCase.deleteUser(userIdToDelete));
 
-        // Verify that repository methods are not called
         verify(userRepository, never()).deleteById(userIdToDelete);
         verify(followRepository, never()).deleteByFollowee(any());
         verify(followRepository, never()).deleteByFollower(any());

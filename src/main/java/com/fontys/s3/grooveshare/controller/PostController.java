@@ -25,8 +25,6 @@ import java.util.Optional;
 public class PostController {
     private final PostRepository postRepository;
     private final CreatePostUseCase createPostUseCase;
-    private final UpdatePostUseCase updatePostUseCase;
-    private final DeletePostUseCase deletePostUseCase;
     private final GetAllPostsUseCase getAllPostsUseCase;
     private final GetPostUseCase getPostUseCase;
     private final UserPostCountUseCase userPostCountUseCase;
@@ -75,20 +73,6 @@ public class PostController {
         }
         return ResponseEntity.ok().body(postOptional.get());
     }
-
-//    @PutMapping("{postId}")
-//    public ResponseEntity<Void> updatePost(@PathVariable("postId") Long postId,
-//                                               @RequestBody @Valid UpdatePostRequest request){
-//        request.setPostId(postId);
-//        updatePostUseCase.updatePost(request);
-//        return ResponseEntity.noContent().build();
-//    }
-
-//    @DeleteMapping("{postId}")
-//    public ResponseEntity<Void> deletePost(@PathVariable Long postId){
-//        deletePostUseCase.deletePost(postId);
-//        return ResponseEntity.noContent().build();
-//    }
 @RolesAllowed({"ADMIN"})
     @GetMapping("stats")
     public ResponseEntity<GetUserPostCountResponse> getUserPostCounts() {

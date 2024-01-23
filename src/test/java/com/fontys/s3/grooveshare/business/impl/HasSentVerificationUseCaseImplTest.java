@@ -27,16 +27,13 @@ class HasSentVerificationUseCaseImplTest {
 
     @Test
     void hasSentVerification_ReturnsFalse_WhenNoVerificationFound() {
-        // Arrange
         HasSentVerificationRequest request = new HasSentVerificationRequest(1L);
         when(verificationRepository.findTopByUserUserIdAndStatusIn(request.getUserId(),
                 Arrays.asList(VerificationStatusEntity.PENDING, VerificationStatusEntity.ACCEPTED)))
                 .thenReturn(Optional.empty());
 
-        // Act
         HasSentVerificationResponse response = hasSentVerificationUseCase.hasSentVerification(request);
 
-        // Assert
         assertFalse(response.isHasSentVerification());
         assertNull(response.getVerificationStatus());
         verify(verificationRepository, times(1)).findTopByUserUserIdAndStatusIn(
@@ -44,7 +41,6 @@ class HasSentVerificationUseCaseImplTest {
     }
     @Test
     void hasSentVerification_ReturnsTrue_WhenVerificationFound() {
-        // Arrange
         HasSentVerificationRequest request = new HasSentVerificationRequest(1L);
         VerificationEntity verificationEntity = new VerificationEntity(
                 1L,
@@ -56,10 +52,8 @@ class HasSentVerificationUseCaseImplTest {
                 Arrays.asList(VerificationStatusEntity.PENDING, VerificationStatusEntity.ACCEPTED)))
                 .thenReturn(Optional.of(verificationEntity));
 
-        // Act
         HasSentVerificationResponse response = hasSentVerificationUseCase.hasSentVerification(request);
 
-        // Assert
         assertTrue(response.isHasSentVerification());
         assertEquals(VerificationStatusEntity.PENDING.toString(), response.getVerificationStatus());
         verify(verificationRepository, times(1)).findTopByUserUserIdAndStatusIn(

@@ -60,11 +60,9 @@ class GenreControllerTest {
     @Test
     @WithMockUser(username = "testuser", roles = "USER")
     void testGetAllGenresFailure() throws Exception {
-        // Arrange
         GetAllGenresRequest request = GetAllGenresRequest.builder().build();
         when(getAllGenresUseCse.getAllGenres(request)).thenThrow(new RuntimeException("Test exception"));
 
-        // Act and Assert
         mockMvc.perform(get("/genres")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());

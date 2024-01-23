@@ -26,21 +26,17 @@ class GetVerificationByIdUseCaseImplTest {
 
     @Test
     void getVerification_ReturnsEmptyOptional_WhenVerificationNotFound() {
-        // Arrange
         Long nonExistentVerificationId = 1L;
         when(verificationRepository.findById(nonExistentVerificationId)).thenReturn(Optional.empty());
 
-        // Act
         Optional<Verification> result = getVerificationByIdUseCase.getVerification(nonExistentVerificationId);
 
-        // Assert
         assertTrue(result.isEmpty());
         verify(verificationRepository, times(1)).findById(nonExistentVerificationId);
     }
 
     @Test
     void getVerification_ReturnsVerification_WhenVerificationFound() {
-        // Arrange
         Long existingVerificationId = 1L;
         VerificationEntity verificationEntity = new VerificationEntity(
                 existingVerificationId,
@@ -50,10 +46,8 @@ class GetVerificationByIdUseCaseImplTest {
         );
         when(verificationRepository.findById(existingVerificationId)).thenReturn(Optional.of(verificationEntity));
 
-        // Act
         Optional<Verification> result = getVerificationByIdUseCase.getVerification(existingVerificationId);
 
-        // Assert
         assertTrue(result.isPresent());
         assertEquals(existingVerificationId, result.get().getId());
         assertEquals("User1", result.get().getUser().getUsername());

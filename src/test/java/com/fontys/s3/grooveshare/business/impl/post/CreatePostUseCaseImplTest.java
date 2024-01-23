@@ -34,7 +34,6 @@ class CreatePostUseCaseImplTest {
 
     @Test
     public void testCreatePost() {
-        // Mock data
         CreatePostRequest request = new CreatePostRequest();
         request.setUserId(1L);
         request.setContent("Test post content");
@@ -60,15 +59,12 @@ class CreatePostUseCaseImplTest {
                 .trackId("testTrackId")
                 .build();
 
-        // Mock repository behaviors
         Mockito.when(userRepository.findById(1L)).thenReturn(Optional.of(userEntity));
         Mockito.when(genreRepository.findById(1L)).thenReturn(Optional.of(genreEntity));
         Mockito.when(postRepository.save(Mockito.any(PostEntity.class))).thenReturn(postEntity);
 
-        // Execute the use case
         CreatePostResponse response = createPostUseCase.createPost(request);
 
-        // Verify the result
         assertEquals(1L, response.getPostId());
         assertEquals("Test post content", response.getContent());
         assertEquals("testTrackId", response.getTrackId());
@@ -76,15 +72,12 @@ class CreatePostUseCaseImplTest {
 
     @Test
     public void testCreatePostWithNonExistingUser() {
-        // Mock data
         CreatePostRequest request = new CreatePostRequest();
         request.setUserId(2L); // User with ID 2 does not exist in the mock repository
         request.setContent("Test post content");
 
-        // Mock repository behaviors
         Mockito.when(userRepository.findById(2L)).thenReturn(Optional.empty());
 
-        // Execute the use case and expect an exception
         assertThrows(IllegalArgumentException.class, () -> createPostUseCase.createPost(request));
     }
 }

@@ -50,15 +50,12 @@ class LogInUserUseCaseImplTest {
         when(passwordEncoder.matches(request.getPassword(), userEntity.getPassword())).thenReturn(true);
         when(accessTokenEncoder.encode(any(AccessTokenImpl.class))).thenReturn("fakeAccessToken");
 
-        // Act
         LogInUserResponse response = logInUserUseCase.loginUser(request);
 
-        // Assert
         assertNotNull(response);
         assertNotNull(response.getAccessToken());
         assertEquals("fakeAccessToken", response.getAccessToken());
 
-        // Verify interactions
         verify(userRepository, times(1)).getUserEntityByUsername(request.getUsername());
         verify(passwordEncoder, times(1)).matches(request.getPassword(), userEntity.getPassword());
         verify(accessTokenEncoder, times(1)).encode(any(AccessTokenImpl.class));
@@ -66,32 +63,26 @@ class LogInUserUseCaseImplTest {
 
     @Test
     void loginUser_InvalidUsername_ThrowsInvalidCredentialsException() {
-        // Arrange
         LogInUserRequest request = new LogInUserRequest("nonexistentUser", "password");
 
         when(userRepository.getUserEntityByUsername(request.getUsername())).thenReturn(null);
 
-        // Act & Assert
         assertThrows(InvalidCredentialsException.class, () -> logInUserUseCase.loginUser(request));
 
-        // Verify interactions
         verify(userRepository, times(1)).getUserEntityByUsername(request.getUsername());
         verifyNoMoreInteractions(passwordEncoder, accessTokenEncoder);
     }
 
     @Test
     void loginUser_InvalidPassword_ThrowsInvalidCredentialsException() {
-        // Arrange
         LogInUserRequest request = new LogInUserRequest("username", "wrongPassword");
         UserEntity userEntity = UserEntity.builder().userId(1L).username("username").password("password").build();
 
         when(userRepository.getUserEntityByUsername(request.getUsername())).thenReturn(userEntity);
         when(passwordEncoder.matches(request.getPassword(), userEntity.getPassword())).thenReturn(false);
 
-        // Act & Assert
         assertThrows(InvalidCredentialsException.class, () -> logInUserUseCase.loginUser(request));
 
-        // Verify interactions
         verify(userRepository, times(1)).getUserEntityByUsername(request.getUsername());
         verify(passwordEncoder, times(1)).matches(request.getPassword(), userEntity.getPassword());
         verifyNoMoreInteractions(accessTokenEncoder);
